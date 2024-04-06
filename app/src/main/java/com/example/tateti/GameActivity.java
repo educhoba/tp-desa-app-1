@@ -14,9 +14,10 @@ public class GameActivity extends AppCompatActivity {
     Button btnCentro, btnCentroArriba, btnCentroAbajo, btnCentroDerecha, btnCentroIzquierda,
            btnArribaDerecha, btnArribaIzquierda, btnAbajoDerecha, btnAbajoIzquierda, btnOtraVez;
     String nombre, jugadorUsa;
-    Integer maquinaUsa;
+    Integer maquinaUsa, jugadas=0;
     boolean tengoElTurno;
     ControlDeJuego cj;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,6 +104,7 @@ public class GameActivity extends AppCompatActivity {
     }
     private void controloBoton(View v, int i, int j) {
         if (tengoElTurno) {
+            jugadas++;
             Button seleccionado = (Button) v;
             if (jugadorUsa.equalsIgnoreCase("circulos"))
                 seleccionado.setText("O");
@@ -116,7 +118,11 @@ public class GameActivity extends AppCompatActivity {
 
             if (cj.gano()) {
                 lblGanador.setText("El ganador es " + nombre);
-            } else {
+            } else if(jugadas==5){
+                lblGanador.setText("Hay empate");
+            }
+
+            else {
                 maquinaUsa = jugadorUsa.equalsIgnoreCase("circulos")?1:2;
                 int posicion = cj.proximoMovimiento(maquinaUsa);
 
@@ -161,9 +167,11 @@ public class GameActivity extends AppCompatActivity {
 
                 if (cj.gano()){
                     lblGanador.setText("El ganador es la máquina");
+
                 }
                 tengoElTurno = true;
             }
+
         }
     }
     private void restart(){
