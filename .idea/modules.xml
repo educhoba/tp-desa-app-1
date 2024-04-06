@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/TaTeTi.iml" filepath="$PROJECT_DIR$/TaTeTi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TaTeTi.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TaTeTi.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TaTeTi.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TaTeTi.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TaTeTi.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TaTeTi.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TaTeTi.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TaTeTi.app.unitTest.iml" />
+    </modules>
+  </component>
+</project>
