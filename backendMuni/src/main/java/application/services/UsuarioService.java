@@ -29,7 +29,7 @@ public class UsuarioService implements IService<Usuarios, Usuarios> {
     @Override
     public Usuarios guardar(Usuarios persona)  {
         System.out.println(persona);
-        if(persona.getDocumento()==null || persona.getMail() == null) {
+        if(persona.getDocumento()==null || persona.getEmail() == null) {
             return null;
         }
         return iRepository.save(persona);
@@ -67,7 +67,7 @@ public class UsuarioService implements IService<Usuarios, Usuarios> {
     }
     public void registrarUsuario(Usuarios usuarios) throws UsuarioException {
         Usuarios p = buscarUsuario(usuarios.getDocumento());
-        p.setMail(usuarios.getMail().trim());
+        p.setMail(usuarios.getEmail().trim());
         p.setContrasenia(usuarios.getContrasenia().trim());
         guardar(p);
     }
@@ -76,9 +76,9 @@ public class UsuarioService implements IService<Usuarios, Usuarios> {
 
         try {
             Usuarios existe = buscarUsuario(persona.getDocumento());
-            Usuarios existeDos = buscaPorMail(persona.getMail());
+            Usuarios existeDos = buscaPorEmail(persona.getEmail());
             if(existe != null || existeDos != null)
-                throw new UsuarioException("Ya existe un vecino con ese documento o mail.");
+                throw new UsuarioException("Ya existe un vecino con ese documento o email.");
         }
         catch (UsuarioException ex){
             System.out.println("entra al catch");
@@ -87,7 +87,7 @@ public class UsuarioService implements IService<Usuarios, Usuarios> {
         }
     }
 
-    public Usuarios buscaPorMail(String mail) throws UsuarioException {
+    public Usuarios buscaPorEmail(String mail) throws UsuarioException {
         Optional<Usuarios> ret = iRepository.findByEmail(mail);
         if(ret.isPresent())
         {

@@ -33,7 +33,7 @@ public class Usuarios {
     public String getDocumento(){
         return documento;
     }
-    public String getMail(){
+    public String getEmail(){
         return this.email;
     }
     public String getContrasenia(){
