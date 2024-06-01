@@ -8,6 +8,14 @@ public class Vecinos {
     @Id
     @Column(name = "documento", length = 20, nullable = false)
     private String documento;
+    @Column(name = "nombre", length = 150, nullable = false)
+    private String nombre;
+    @Column(name = "apellido", length = 150, nullable = false)
+    private String apellido;
+    @Column(name = "direccion", length = 250, nullable = true)
+    private String direccion;
+    @Column(name = "codigoBarrio", nullable = true)
+    private int codigoBarrio;
 
     public Vecinos(){
 
@@ -18,8 +26,10 @@ public class Vecinos {
     }
 
     //<editor-fold desc="Getters">
-    public String getPk(){
+    public String getDocumento(){
         return this.documento;
+    }public String getNombre(){
+        return this.nombre;
     }
     //</editor-fold>
 

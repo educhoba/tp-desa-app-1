@@ -16,7 +16,6 @@ import java.util.Map;
 @RequestMapping("/usuarios")
 public class UsuariosController {
 
-    // DuenioService duenioService;
     @Autowired
     private UsuarioService usuarioService;
 
