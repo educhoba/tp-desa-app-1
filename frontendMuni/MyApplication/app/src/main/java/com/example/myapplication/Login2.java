@@ -17,14 +17,14 @@ import retrofit2.Retrofit;
 
 public class Login2 extends AppCompatActivity {
     private Button btn;
-
+    private EditText contra;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_p2);
 
-        EditText contra = findViewById(R.id.Password);
+        contra = findViewById(R.id.Password);
         btn = findViewById(R.id.login2_button);
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -34,13 +34,13 @@ public class Login2 extends AppCompatActivity {
                     Toast.makeText(Login2.this, "Ingrese una contraseña", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                new BuscarContraTask().execute(contrasenia);
+                new BuscarContraUserTask().execute(contrasenia);
             }
         });
     }
 
     // AsyncTask para realizar alguna tarea en segundo plano
-    private class BuscarContraTask extends AsyncTask<String, Void, Boolean> {
+    private class BuscarContraUserTask extends AsyncTask<String, Void, Boolean> {
 
         private Usuarios user;
         String inputContrasenia;
@@ -58,7 +58,7 @@ public class Login2 extends AppCompatActivity {
                     user = response.body();
                     return true;
                 } else {
-                    throw new IOException("Error de servidor");
+                    return false;
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -70,6 +70,7 @@ public class Login2 extends AppCompatActivity {
         protected void onPostExecute(Boolean existe) {
             if (existe) {
                 if (user.getContrasenia().equals(inputContrasenia)){
+
                     Intent intent = new Intent(Login2.this, PerfilUser.class);
                     startActivity(intent);
                 }
@@ -79,8 +80,59 @@ public class Login2 extends AppCompatActivity {
                 }
 
             } else {
-                Toast.makeText(Login2.this, "Error de Servidor", Toast.LENGTH_SHORT).show();
+                new BuscarContraInspectorTask().execute(inputContrasenia);
+
             }
         }
     }
+
+    private class BuscarContraInspectorTask extends AsyncTask<String, Void, Boolean> {
+
+        private Inspector inspector;
+        String inputContrasenia;
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+            inputContrasenia = params[0];
+            String dni = getIntent().getStringExtra("dni");
+            Retrofit retrofit = RetrofitClient.getClient();
+            ApiService apiService = retrofit.create(ApiService.class);
+
+            try {
+                Response<Inspector> response = apiService.buscarInspector(dni).execute();
+                if (response.isSuccessful() && response.body() != null) {
+                    inspector = response.body();
+                    return true;
+                } else {
+                    return false;
+                }
+            }catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean existe) {
+            if (existe) {
+                if (inspector.getPassword().equals(inputContrasenia)){
+                    Intent intent = new Intent(Login2.this, PerfilInspector.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(Login2.this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show();
+
+                }
+
+            } else {
+                Toast.makeText(Login2.this,"DNI no encontrado",Toast.LENGTH_SHORT).show();
+
+
+            }
+        }
+    }
+
+
+
+
 }

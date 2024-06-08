@@ -10,18 +10,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="30dp"
-        android:layout_margin="30dp">
+        android:layout_margin="30dp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center_horizontal"
-            android:padding="24dp">
+            android:padding="24dp"
+            >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Actualice su contraseña"
+                android:text="Genere su contraseña"
                 android:id="@+id/loginText"
                 android:textSize="36sp"
                 android:textAlignment="center"
@@ -30,7 +32,20 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/act_Password"
+                android:id="@+id/codigo_Password"
+                android:background="@drawable/custom_editext"
+                android:drawableLeft="@drawable/baseline_lock_24"
+                android:drawablePadding="8dp"
+                android:hint="Código recibido por mail"
+                android:inputType="textPassword"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="40dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/nueva_Password"
                 android:background="@drawable/custom_editext"
                 android:drawableLeft="@drawable/baseline_lock_24"
                 android:drawablePadding="8dp"
@@ -43,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:id="@+id/Actualice_contraButton"
-                android:text="Ingresar"
+                android:text="Confirmar"
                 android:textSize="18sp"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="@color/blue"/>

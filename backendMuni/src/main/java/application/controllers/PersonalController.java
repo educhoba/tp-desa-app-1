@@ -20,7 +20,7 @@ import java.util.List;
 public class PersonalController {
 
     @Autowired
-    private PersonalService personalService;
+    private PersonalService personalService;  
 
     private PersonalController() { }
 

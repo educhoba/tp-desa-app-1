@@ -12,9 +12,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
-
-import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -54,6 +51,7 @@ public class Login1 extends AppCompatActivity {
     }
 
     private class BuscarDniTask extends AsyncTask<String, Void, Boolean> {
+        private Vecinos vecino;
         EditText editTextDNI = findViewById(R.id.Username);
         String documento = editTextDNI.getText().toString();
         @Override
@@ -63,10 +61,13 @@ public class Login1 extends AppCompatActivity {
             ApiService apiService = retrofit.create(ApiService.class);
 
             try {
-                Response<Boolean> response = apiService.buscarDNI(documento).execute();
+                Response<Vecinos> response = apiService.buscarDNI(documento).execute();
                 if (response.isSuccessful() && response.body() != null) {
-                    return response.body();
-                } else {
+                    vecino = response.body();
+                    return true;
+
+                }
+                else {
                     throw new IOException("Error de servidor");
                 }
             } catch (IOException e) {
@@ -79,10 +80,10 @@ public class Login1 extends AppCompatActivity {
         protected void onPostExecute(Boolean existe) {
             if (existe) {
                 new VerificarUserTask().execute(documento);
-
-            } else {
-                Toast.makeText(Login1.this, "DNI no encontrado", Toast.LENGTH_SHORT).show();
+            }else{
+                new VerificarInspectorTask().execute(documento);
             }
+
         }
 
 
@@ -130,7 +131,46 @@ public class Login1 extends AppCompatActivity {
             }
         }
 
+    }
+
+    private class VerificarInspectorTask extends AsyncTask<String, Void, Boolean> {
+        private Inspector inspector;
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+            String documento = params[0];
+            Retrofit retrofit = RetrofitClient.getClient();
+            ApiService apiService = retrofit.create(ApiService.class);
+
+            try {
+                Response<Inspector> response = apiService.buscarInspector(documento).execute();
+                if (response.isSuccessful() && response.body() != null) {
+                    inspector = response.body();
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean existe) {
+            if (existe) {
+                String documento = inspector.getDocumento();
+                Intent intent = new Intent(Login1.this, Login2.class);
+                intent.putExtra("dni",documento);
+                startActivity(intent);
+
+            } else {
+                Toast.makeText(Login1.this, "DNI no encontrado", Toast.LENGTH_SHORT).show();
+
+            }
+        }
 
     }
+
 }
 
