@@ -2,7 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="blue">#4287f5</color>
+    <color name="blue">#257cbb</color>
+    <color name="bluedark">#0d3f75</color>
+    <color name="bluelight">#95c3f5</color>
+    <color name="cardwhite">#cde1f7</color>
     <color name="transparent">#00000000</color>
 
 </resources>

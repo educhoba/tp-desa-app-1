@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible"
+    tools:context=".PerfilUser"
+    tools:visibility="visible"
+    android:background="@drawable/fondo">
+
+    <include layout="@layout/barra_navegacion"/>
+
+    <LinearLayout
+        android:id="@+id/constraint_usuario"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:paddingTop="20dp"
+        >
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/user"/>
+
+
+        <TextView
+            android:id="@+id/nombre_usuario"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Usuario"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            />
+
+        <ImageView
+            android:id="@+id/configImage"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/baseline_settings_24"
+            android:layout_marginEnd="20dp"/>
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/constraint_usuario"
+        android:layout_marginTop="30dp"
+        >
+
+        <Button
+            android:id="@+id/btn_generar_reclamo"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Generar reclamo"
+            android:textSize="20dp"
+            android:backgroundTint="@color/bluelight"
+            app:layout_constraintTop_toBottomOf="@id/constraint_usuario"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/bluedark"/>
+
+        <Button
+            android:id="@+id/btn_generar_publicacion"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Generar publicación"
+            android:textSize="20dp"
+            android:backgroundTint="@color/bluelight"
+            app:layout_constraintTop_toBottomOf="@+id/btn_generar_reclamo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/bluedark"/>
+
+        <Button
+            android:id="@+id/btn_generar_denuncia"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Generar denuncia"
+            android:textSize="20dp"
+            android:backgroundTint="@color/bluelight"
+            app:layout_constraintTop_toBottomOf="@+id/btn_generar_publicacion"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/bluedark"/>
+
+        <Button
+            android:id="@+id/btn_comyprof"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Comercios y profesionales"
+            android:textSize="20dp"
+            android:backgroundTint="@color/bluelight"
+            app:layout_constraintTop_toBottomOf="@+id/btn_generar_denuncia"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/bluedark"/>
+
+        <Button
+            android:id="@+id/btn_ver_reclamos"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Ver reclamos"
+            android:textSize="20dp"
+            android:backgroundTint="@color/bluelight"
+            app:layout_constraintTop_toBottomOf="@+id/btn_comyprof"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/bluedark"/>
+
+        <Button
+            android:id="@+id/btn_ver_denuncias"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Ver denuncias"
+            android:textSize="20dp"
+            android:backgroundTint="@color/bluelight"
+            app:layout_constraintTop_toBottomOf="@+id/btn_ver_reclamos"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/bluedark"/>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

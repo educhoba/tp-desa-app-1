@@ -1,49 +1,51 @@
 package com.example.myapplication;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.content.Intent;
+import android.view.View;
+import android.widget.Button;
 
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-    comercios comercios = new comercios();
-    profesionales profesionales = new profesionales();
+
+
+    private Button botonEnviar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-    }
-    private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            switch (menuItem.getItemId()){
-                case R.id.comercios:
-                    loadFragment(comercios);
-                    return true;
-                case R.id.profesionales:
-                    loadFragment(profesionales);
-                    return true;
+        botonEnviar = findViewById(R.id.button);
+        botonEnviar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new BackgroundTask().execute();
             }
-            return false;
+        });
+    }
+
+    // AsyncTask para realizar alguna tarea en segundo plano
+    private class BackgroundTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
         }
-    };
-    public void loadFragment(Fragment fragment){
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_container,fragment);
-        transaction.commit();
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            Intent intent = new Intent(MainActivity.this, Login1.class);
+            startActivity(intent);
+        }
     }
 }
