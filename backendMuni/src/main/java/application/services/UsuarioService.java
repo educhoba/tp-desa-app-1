@@ -66,10 +66,11 @@ public class UsuarioService implements IService<Usuarios, Usuarios> {
             throw new UsuarioException("No existe una usuario con ese documento.");
     }
     public void registrarUsuario(Usuarios usuarios) throws UsuarioException {
+        Usuarios existe = buscarUsuario(usuarios.getDocumento());
         //no chequea si existe
         Usuarios existeDos = buscaPorEmail(usuarios.getEmail());
-        if(existeDos != null)
-            throw new UsuarioException("Ya existe un usuario con ese email.");
+        if(existe != null || existeDos != null)
+            throw new UsuarioException("Ya existe un usuario con ese email o documento.");
 
         guardar(usuarios);
     }
