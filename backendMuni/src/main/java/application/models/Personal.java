@@ -77,6 +77,10 @@ public class Personal {
     //</editor-fold>
 
     //<editor-fold desc="Setters">
+
+    public void setPassword(String pass){
+        this.password = pass;
+    }
     //</editor-fold>
 
 

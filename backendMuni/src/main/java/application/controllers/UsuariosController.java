@@ -50,16 +50,16 @@ public class UsuariosController {
                 .body("Usuario registrado.");
     }
 
-    @PostMapping public Usuarios cargar(@RequestBody Usuarios usuarios) {
+    @PostMapping("/cambiarContrasenia")
+    public Usuarios cambiarContrasenia(@RequestBody Usuarios usuarios) {
         try{
-            usuarioService.agregarUsuario(usuarios);
+            usuarioService.cambiarContrasenia(usuarios);
             return usuarios;
         }
         catch (UsuarioException ex){
             return null;
         }
     }
-
     //si esta autorizado devuelve la persona, sino devuelve 1
     @GetMapping("/login")
     public ResponseEntity<Usuarios> login(@RequestBody Map<String, String> requestBody) {

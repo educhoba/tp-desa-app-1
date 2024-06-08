@@ -66,8 +66,15 @@ public class UsuarioService implements IService<Usuarios, Usuarios> {
             throw new UsuarioException("No existe una usuario con ese documento.");
     }
     public void registrarUsuario(Usuarios usuarios) throws UsuarioException {
+        //no chequea si existe
+        Usuarios existeDos = buscaPorEmail(usuarios.getEmail());
+        if(existeDos != null)
+            throw new UsuarioException("Ya existe un usuario con ese email.");
+
+        guardar(usuarios);
+    }
+    public void cambiarContrasenia(Usuarios usuarios) throws UsuarioException {
         Usuarios p = buscarUsuario(usuarios.getDocumento());
-        p.setMail(usuarios.getEmail().trim());
         p.setContrasenia(usuarios.getContrasenia().trim());
         guardar(p);
     }
@@ -89,11 +96,7 @@ public class UsuarioService implements IService<Usuarios, Usuarios> {
 
     public Usuarios buscaPorEmail(String mail) throws UsuarioException {
         Optional<Usuarios> ret = iRepository.findByEmail(mail);
-        if(ret.isPresent())
-        {
-            return ret.get();
-        }
-        else
-            throw new UsuarioException("No existe una persona con ese email. Contactese a la admin para registrarse.");    }
+        return ret.orElse(null);
+    }
 
 }
