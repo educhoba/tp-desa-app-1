@@ -27,14 +27,14 @@ public class VecinosController {
     }
 
     @GetMapping("/{documento}")
-    public ResponseEntity<Boolean> buscar(@PathVariable String documento) {
+    public ResponseEntity<Vecinos> buscar(@PathVariable String documento) {
         try{
             Vecinos vecino = vecinosService.buscarVecino(documento);
             if(vecino != null){
-                return ResponseEntity.ok(true);
+                return ResponseEntity.ok(vecino);
             }
             else{
-                return ResponseEntity.ok(false);
+                return ResponseEntity.ok(null);
             }
         }
         catch (VecinoException ex){

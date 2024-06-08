@@ -68,7 +68,7 @@ public class UsuariosController {
 
         System.out.println("login "+documento+" "+contrasenia);
         try {
-            Usuarios usuarios1 = usuarioService.buscarPorDocumento(documento);
+            Usuarios usuarios1 = usuarioService.buscarUsuario(documento);
             if( usuarios1.getContrasenia().equals(contrasenia))
                 return ResponseEntity.ok(usuarios1);
         }

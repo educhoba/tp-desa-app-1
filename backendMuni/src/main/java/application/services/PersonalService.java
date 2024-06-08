@@ -1,12 +1,16 @@
 package application.services;
 
+import application.exceptions.PersonalException;
+import application.exceptions.UsuarioException;
 import application.models.Personal;
+import application.models.Usuarios;
 import application.repositories.IPersonalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -30,8 +34,18 @@ public class PersonalService implements IService<Personal, Personal> {
     }
 
     @Override
-    public Personal buscarPorPK(String pk) {
+    public Personal buscarPorPK(String documento) {
         return null;
+    }
+
+    public Personal buscarPersonal(String documento) throws PersonalException {
+        Optional<Personal> ret = iRepository.findByDocumento(documento);
+        if(ret.isPresent())
+        {
+            return ret.get();
+        }
+        else
+            throw new PersonalException("No existe un personal con ese documento.");
     }
 
     @Override

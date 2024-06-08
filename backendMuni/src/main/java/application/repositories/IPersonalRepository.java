@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface IPersonalRepository extends JpaRepository<Personal,Long> {
     public Optional<Personal> findByLegajo(Integer integer);
+    public Optional<Personal> findByDocumento(String documento);
 
 }
