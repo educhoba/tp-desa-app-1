@@ -42,7 +42,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:id="@+id/login_con_Button"
+                android:id="@+id/Actualice_contraButton"
                 android:text="Ingresar"
                 android:textSize="18sp"
                 android:layout_marginTop="20dp"
