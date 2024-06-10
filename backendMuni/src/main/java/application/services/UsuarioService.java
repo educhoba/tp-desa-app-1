@@ -56,14 +56,14 @@ public class UsuarioService implements IService<Usuarios, Usuarios> {
     }
 
 
-    public Usuarios buscarUsuario(String documento) throws UsuarioException {
+    public Usuarios buscarUsuario(String documento){
         Optional<Usuarios> ret = iRepository.findByDocumento(documento);
         if(ret.isPresent())
         {
             return ret.get();
         }
         else
-            throw new UsuarioException("No existe una usuario con ese documento.");
+            return null;
     }
     public void registrarUsuario(Usuarios usuarios) throws UsuarioException {
         Usuarios existe = buscarUsuario(usuarios.getDocumento());

@@ -39,7 +39,7 @@ public class Personal {
         this.password = password;
         this.sector = sector;
         this.codigoBarrio = codigoBarrio;
-        this.fechaIngreso = fechaIngreso;
+       // this.fechaIngreso = fechaIngreso;
     }
 
     //<editor-fold desc="Getters">

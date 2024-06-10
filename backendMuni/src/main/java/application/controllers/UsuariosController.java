@@ -28,12 +28,14 @@ public class UsuariosController {
 
     @GetMapping("/{documento}")
     public ResponseEntity<Usuarios> buscar(@PathVariable String documento) {
-        try{
-            Usuarios usuarios = usuarioService.buscarUsuario(documento);
-            return ResponseEntity.ok(usuarios);
-        }
-        catch (UsuarioException ex){
+
+        Usuarios usuarios = usuarioService.buscarUsuario(documento);
+
+        if(usuarios == null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        else{
+            return ResponseEntity.ok(usuarios);
         }
     }
 
@@ -60,23 +62,6 @@ public class UsuariosController {
             return null;
         }
     }
-    //si esta autorizado devuelve la persona, sino devuelve 1
-    @GetMapping("/login")
-    public ResponseEntity<Usuarios> login(@RequestBody Map<String, String> requestBody) {
-        String documento = requestBody.get("documento");
-        String contrasenia = requestBody.get("contrasenia");
 
-        System.out.println("login "+documento+" "+contrasenia);
-        try {
-            Usuarios usuarios1 = usuarioService.buscarUsuario(documento);
-            if( usuarios1.getContrasenia().equals(contrasenia))
-                return ResponseEntity.ok(usuarios1);
-        }
-        catch (UsuarioException ex){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-    }
 }
 
