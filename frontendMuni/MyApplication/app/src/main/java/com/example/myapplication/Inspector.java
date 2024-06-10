@@ -1,14 +1,31 @@
 package com.example.myapplication;
-
+import com.google.gson.annotations.SerializedName;
 import java.util.Date;
-public class Inspector {
+import java.io.Serializable;
+
+public class Inspector implements Serializable {
+    @SerializedName("legajo")
     private Integer legajo;
+
+    @SerializedName("nombre")
     private String nombre;
+
+    @SerializedName("apellido")
     private String apellido;
+
+    @SerializedName("documento")
     private String documento;
+
+    @SerializedName("password")
     private String password;
+
+    @SerializedName("sector")
     private String sector;
+
+    @SerializedName("codigoBarrio")
     private int codigoBarrio;
+
+    @SerializedName("fechaIngreso")
     private Date fechaIngreso;
 
 
@@ -50,9 +67,9 @@ public class Inspector {
         return codigoBarrio;
     }
 
-    public Date getFechaIngreso() {
+   /* public Date getFechaIngreso() {
         return fechaIngreso;
-    }
+    }*/
 
     // Setters
     public void setLegajo(Integer legajo) {

@@ -70,10 +70,10 @@ public class Personal {
     public int getCodigoBarrio() {
         return codigoBarrio;
     }
-
+/* 
     public Date getFechaIngreso() {
         return fechaIngreso;
-    }
+    }*/
     //</editor-fold>
 
     //<editor-fold desc="Setters">

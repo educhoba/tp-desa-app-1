@@ -2,6 +2,8 @@ package com.example.myapplication;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 
 public class RetrofitClient {
@@ -12,6 +14,10 @@ public class RetrofitClient {
 
     public static Retrofit getClient() {
         if (retrofit == null) {
+            Gson gson = new GsonBuilder()
+                    .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX")
+                    .create();
+
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())

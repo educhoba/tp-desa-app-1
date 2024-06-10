@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,9 @@ import java.security.SecureRandom;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import androidx.appcompat.app.AlertDialog;
+import android.content.DialogInterface;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -65,19 +69,23 @@ public class Registrarse extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Usuarios... usuarios) {
             Usuarios usuario = usuarios[0];
+            String codigo = usuario.getContrasenia();
 
             Retrofit retrofit = RetrofitClient.getClient();
             ApiService apiService = retrofit.create(ApiService.class);
+
             Call<Void> call = apiService.registrarUsuario(usuario);
             try {
 
                 Response<Void> response = call.execute();
 
-
                 if (response.isSuccessful()) {
-                    return true;
+                    String subject = "Verificación de correo";
+                    String body = "Por favor, use el siguiente código para verificar su cuenta:"+codigo;
+                    Call<Void> emailCall = apiService.enviarCorreoVerificacion(usuario.getEmail(),subject,body);
+                    Response<Void> emailResponse = emailCall.execute();
+                    return emailResponse.isSuccessful();
                 } else {
-                    // Ocurrió un error al registrar el usuario
                     return false;
                 }
             } catch (Exception e) {
@@ -89,12 +97,29 @@ public class Registrarse extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean success) {
             if (success) {
-                Toast.makeText(Registrarse.this, "Usuario creado con éxito", Toast.LENGTH_SHORT).show();
+                mostrarDialogoVerificacion();
             } else {
                 Toast.makeText(Registrarse.this, "Error al crear usuario", Toast.LENGTH_SHORT).show();
             }
         }
     }
+
+    private void mostrarDialogoVerificacion() {
+        new AlertDialog.Builder(this)
+                .setTitle("Verificación de correo")
+                .setMessage("Por favor, verifique su casilla de correo. Le hemos enviado un código de verificación.")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Redirigir a la actividad de ingreso del código de verificación
+                        Intent intent = new Intent(Registrarse.this, Login3.class);
+                        startActivity(intent);
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .show();
+    }
+
+
 
 
 

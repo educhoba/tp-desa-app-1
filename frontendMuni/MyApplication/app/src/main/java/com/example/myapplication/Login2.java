@@ -18,6 +18,8 @@ import retrofit2.Retrofit;
 public class Login2 extends AppCompatActivity {
     private Button btn;
     private EditText contra;
+    private String cargo;
+
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,6 @@ public class Login2 extends AppCompatActivity {
         });
     }
 
-    // AsyncTask para realizar alguna tarea en segundo plano
     private class BuscarContraUserTask extends AsyncTask<String, Void, Boolean> {
 
         private Usuarios user;
@@ -70,8 +71,10 @@ public class Login2 extends AppCompatActivity {
         protected void onPostExecute(Boolean existe) {
             if (existe) {
                 if (user.getContrasenia().equals(inputContrasenia)){
-
+                    cargo="Usuario";
                     Intent intent = new Intent(Login2.this, PerfilUser.class);
+                    intent.putExtra("cargo",cargo);
+                    intent.putExtra("usuario",user);
                     startActivity(intent);
                 }
                 else{
@@ -116,7 +119,10 @@ public class Login2 extends AppCompatActivity {
         protected void onPostExecute(Boolean existe) {
             if (existe) {
                 if (inspector.getPassword().equals(inputContrasenia)){
+                    cargo="Inspector";
                     Intent intent = new Intent(Login2.this, PerfilInspector.class);
+                    intent.putExtra("cargo",cargo);
+                    intent.putExtra("usuario",inspector);
                     startActivity(intent);
                 }
                 else{

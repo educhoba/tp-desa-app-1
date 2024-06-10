@@ -10,9 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class PerfilInspector extends AppCompatActivity {
     ImageView btn_back;
     ImageView home;
-
+    Inspector inspector;
     ImageView config;
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,15 +21,18 @@ public class PerfilInspector extends AppCompatActivity {
         home = findViewById(R.id.home);
         config = findViewById(R.id.configImage);
 
+        String cargo = getIntent().getStringExtra("cargo");
+        inspector =  (Inspector) getIntent().getSerializableExtra("usuario");
+
         config.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PerfilInspector.this, configuracion.class);
+                intent.putExtra("cargo",cargo);
+                intent.putExtra("usuario",inspector);
                 startActivity(intent);
             }
         });
-
-
 
 
     }

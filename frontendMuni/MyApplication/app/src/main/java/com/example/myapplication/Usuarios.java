@@ -1,11 +1,14 @@
 package com.example.myapplication;
 
-public class Usuarios {
+
+import java.io.Serializable;
+
+
+public class Usuarios implements Serializable {
     private String documento;
     private String email;
     private String contrasenia;
     public Usuarios() {
-        // Constructor vacío requerido para Firebase o Gson, por ejemplo
     }
     public Usuarios(String documento, String email, String contrasenia) {
         this.documento = documento;
@@ -35,4 +38,7 @@ public class Usuarios {
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
+
+
+
 }
