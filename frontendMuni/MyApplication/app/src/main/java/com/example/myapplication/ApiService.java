@@ -19,7 +19,7 @@ public interface ApiService {
     @POST("/usuarios/registrarUsuario")
     Call <Void> registrarUsuario(@Body Usuarios usuario);
 
-    @POST("/enviar/to/{to}/subject/{subject}/body/{body}")
+    @POST("/email/enviar/to/{to}/subject/{subject}/body/{body}")
     Call<Void> enviarCorreoVerificacion(
             @Path("to") String to,
             @Path("subject") String subject,

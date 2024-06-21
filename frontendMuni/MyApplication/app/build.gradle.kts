@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.androidApplication)
 }
-
 android {
     namespace = "com.example.myapplication"
     compileSdk = 34
@@ -21,6 +20,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+        
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

@@ -1,4 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <!-- Base application theme. -->
     <style name="Base.Theme.MyApplication" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/black</item>
@@ -11,12 +12,19 @@
 
 
 
-
     <style name="BottomNavigation">
         <item name="android:background">@color/blue</item>
         <item name="itemIconTint">@color/white</item>
         <item name="itemTextColor">@color/white</item>
 
+    </style>
+
+    <style name="ButtonStyle">
+        <!-- Fondo blanco -->
+        <item name="android:background">@color/bluelight</item>
+        <!-- Texto negro -->
+        <item name="android:textColor">@android:color/black</item>
+        <!-- Otros atributos según tus necesidades -->
     </style>
 
 </resources>

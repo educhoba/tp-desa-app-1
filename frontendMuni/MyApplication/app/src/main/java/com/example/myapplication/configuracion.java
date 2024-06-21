@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -100,7 +101,8 @@ public class configuracion extends AppCompatActivity {
         protected void onPostExecute(Boolean success) {
             if (success) {
                 Toast.makeText(configuracion.this, "Contraseña cambiada con éxito", Toast.LENGTH_SHORT).show();
-                // Aquí podrías redirigir al usuario a otra actividad si es necesario
+                Intent intent = new Intent(configuracion.this, Login1.class);
+                startActivity(intent);
             } else {
                 Toast.makeText(configuracion.this, "Error al cambiar contraseña", Toast.LENGTH_SHORT).show();
             }

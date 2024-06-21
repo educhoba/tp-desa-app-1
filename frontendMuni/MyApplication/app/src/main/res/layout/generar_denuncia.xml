@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible"
+    tools:context=".PerfilUser"
+    tools:visibility="visible"
+    android:background="@drawable/fondo">
+
+    <include layout="@layout/barra_navegacion"/>
+
+    <LinearLayout
+        android:id="@+id/constraint_usuario"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:paddingTop="20dp"
+        >
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/user"/>
+
+
+        <TextView
+            android:id="@+id/nombre_usuario"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Usuario"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <ImageView
+            android:id="@+id/configImage"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/baseline_settings_24"
+            android:layout_marginEnd="20dp"/>
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/constraint_usuario"
+        android:layout_marginTop="50dp"
+        >
+
+        <TextView
+            android:id="@+id/texto_denuncia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Generar Denuncia"
+            android:textSize="30dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"/>
+
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="40dp"
+            android:padding="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Seleccione el tipo de denuncia"
+                android:textStyle="bold"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
+                android:text="Comercio" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
+                android:text="Vecino"/>
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/layoutLin"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+            android:layout_margin="16dp"
+            android:background="@drawable/card_border"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Datos del denunciado"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:padding="5dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/Nombre"
+                android:hint="Nombre"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/Direccion"
+                android:hint="Dirección"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/descripcion"
+                android:hint="Descripción"
+                android:paddingBottom="50dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="33dp"
+                android:backgroundTint="@color/blue"
+                android:drawableLeft="@drawable/file"
+                android:text="Adjuntar archivos"
+                android:textSize="10dp" />
+
+
+
+
+
+        </LinearLayout>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Acepto que lo indicado en el objeto de la denuncia y pruebas aportadas, en caso de falsedad puede dar lugar a una acción judicial por parte del municipio y/o los denunciados."
+            android:textSize="10dp"
+            android:padding="5dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Generar"
+            android:backgroundTint="@color/blue"/>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

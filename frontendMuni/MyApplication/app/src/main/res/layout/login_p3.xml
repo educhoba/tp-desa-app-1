@@ -32,7 +32,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/codigo_Password"
+                android:id="@+id/Password"
                 android:background="@drawable/custom_editext"
                 android:drawableLeft="@drawable/baseline_lock_24"
                 android:drawablePadding="8dp"
@@ -45,7 +45,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/nueva_Password"
+                android:id="@+id/Username"
                 android:background="@drawable/custom_editext"
                 android:drawableLeft="@drawable/baseline_lock_24"
                 android:drawablePadding="8dp"

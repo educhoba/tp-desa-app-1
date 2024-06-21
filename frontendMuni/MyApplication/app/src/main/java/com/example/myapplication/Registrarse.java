@@ -20,6 +20,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Registrarse extends AppCompatActivity {
 
+    private String contrasenia;
+    private Usuarios usuario;
+
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -44,10 +47,10 @@ public class Registrarse extends AppCompatActivity {
                 }
 
 
-                String contrasenia = generarContrasenaAleatoria(20);
-                Usuarios nuevoUsuario = new Usuarios(documento, email, contrasenia);
+                contrasenia = generarContrasenaAleatoria(20);
+                usuario = new Usuarios(documento, email, contrasenia);
 
-                new GuardarUsuarioTask().execute(nuevoUsuario);
+                new GuardarUsuarioTask().execute(usuario);
             }
         });
 
@@ -82,9 +85,13 @@ public class Registrarse extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     String subject = "Verificación de correo";
                     String body = "Por favor, use el siguiente código para verificar su cuenta:"+codigo;
-                    Call<Void> emailCall = apiService.enviarCorreoVerificacion(usuario.getEmail(),subject,body);
-                    Response<Void> emailResponse = emailCall.execute();
-                    return emailResponse.isSuccessful();
+                    Response<Void> emailResponse = apiService.enviarCorreoVerificacion(usuario.getEmail(), subject, body).execute();
+                    if (emailResponse.isSuccessful()) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+
                 } else {
                     return false;
                 }
@@ -99,7 +106,7 @@ public class Registrarse extends AppCompatActivity {
             if (success) {
                 mostrarDialogoVerificacion();
             } else {
-                Toast.makeText(Registrarse.this, "Error al crear usuario", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Registrarse.this, "Error de envio", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -112,6 +119,8 @@ public class Registrarse extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         // Redirigir a la actividad de ingreso del código de verificación
                         Intent intent = new Intent(Registrarse.this, Login3.class);
+                        intent.putExtra("codigo",contrasenia);
+                        intent.putExtra("usuario",usuario);
                         startActivity(intent);
                     }
                 })

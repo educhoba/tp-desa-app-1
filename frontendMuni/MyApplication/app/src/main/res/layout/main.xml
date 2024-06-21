@@ -31,6 +31,7 @@
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
     <LinearLayout
+        android:id="@+id/botones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -42,37 +43,64 @@
         <Button
             app:layout_constraintTop_toBottomOf="@+id/bottom_navigation"
             android:layout_width="210dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:text="Comercios"
-            android:background="@drawable/button_square"/>
+            android:backgroundTint="@color/bluelight"
+            android:textColor="@color/black"
+            />
         <Button
             app:layout_constraintTop_toBottomOf="@+id/bottom_navigation"
             android:layout_width="210dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:text="Profesionales"
-            style="@style/ButtonStyle"/>
+            android:backgroundTint="@color/bluelight"
+            android:textColor="@color/black"
+            />
 
 
     </LinearLayout>
 
     <!--Comercios-->
     <LinearLayout
+        android:id="@+id/comercios"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@+id/botones">
 
-        >
+        <Spinner
+            android:id="@+id/mySpinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="100dp"/>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/verduleria"
+            app:layout_constraintTop_toBottomOf="@+id/mySpinner"
+            android:scaleType="centerCrop" />
+
 
 
     </LinearLayout>
 
+
+
+
     <!--Profesionales-->
     <LinearLayout
+        android:id="@+id/profesionales"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:visibility="gone">
 
-        >
+        <Spinner
+            android:id="@+id/mySpinnerr"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="100dp"/>
 
 
     </LinearLayout>

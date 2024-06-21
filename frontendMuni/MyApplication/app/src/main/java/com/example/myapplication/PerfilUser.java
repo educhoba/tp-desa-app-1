@@ -2,7 +2,9 @@ package com.example.myapplication;
 
 import android.os.Bundle;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 
 public class PerfilUser extends AppCompatActivity {
     ImageView btn_back;
+
     ImageView home;
     Usuarios user;
     ImageView config;
@@ -24,6 +27,8 @@ public class PerfilUser extends AppCompatActivity {
 
         btn_back = findViewById(R.id.btn_back);
         home = findViewById(R.id.home);
+
+        Button btn = findViewById(R.id.Password);
 
         config = findViewById(R.id.configImage);
         String cargo = getIntent().getStringExtra("cargo");
@@ -39,6 +44,15 @@ public class PerfilUser extends AppCompatActivity {
             }
         });
 
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Button Click", "Button clicked, starting GenerarReclamo activity...");
+
+                Intent intent = new Intent(PerfilUser.this, GenerarReclamo.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
