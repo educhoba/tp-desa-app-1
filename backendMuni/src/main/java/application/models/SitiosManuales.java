@@ -10,6 +10,8 @@ public class SitiosManuales {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idSitioManual")
     private Integer idSitioManual;
+    @Column(name = "descripcion")
+    private String descripcion;
 
     public SitiosManuales(){
 
@@ -20,8 +22,16 @@ public class SitiosManuales {
     }
 
     //<editor-fold desc="Getters">
-    public Integer getId(){
+    public Integer getidSitioManual(){
         return this.idSitioManual;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
     //</editor-fold>
 

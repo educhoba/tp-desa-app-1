@@ -10,6 +10,16 @@ public class Denuncias {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idDenuncias")
     private Integer idDenuncias;
+    @Column(name = "documento", length = 20, nullable = false)
+    private String documento;
+    @Column(name = "idSitio", nullable = true)
+    private Integer idSitio;
+    @Column(name = "descripcion", length = 2000, nullable = true)
+    private String descripcion;
+    @Column(name = "estado", length = 150, nullable = true)
+    private String estado;
+    @Column(name = "aceptaResponsabilidad", nullable = false)
+    private Integer aceptaResponsabilidad;
 
     public Denuncias(){
 
@@ -20,8 +30,53 @@ public class Denuncias {
     }
 
     //<editor-fold desc="Getters">
-    public Integer getId(){
-        return this.idDenuncias;
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+
+    public Integer getIdSitio() {
+        return idSitio;
+    }
+
+    public void setIdSitio(Integer idSitio) {
+        this.idSitio = idSitio;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public Integer getAceptaResponsabilidad() {
+        return aceptaResponsabilidad;
+    }
+
+    public void setAceptaResponsabilidad(Integer aceptaResponsabilidad) {
+        this.aceptaResponsabilidad = aceptaResponsabilidad;
+    }
+
+    public Integer getIdDenuncias() {
+        return idDenuncias;
+    }
+
+    public void setIdDenuncias(Integer idDenuncias) {
+        this.idDenuncias = idDenuncias;
     }
     //</editor-fold>
 

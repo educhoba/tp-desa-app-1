@@ -7,8 +7,22 @@ import jakarta.persistence.*;
 public class Reclamos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Reclamos")
+    @Column(name = "idReclamo")
     private Integer idReclamo;
+    @Column(name = "documento", length = 20, nullable = true)
+    private String documento;
+    @Column(name = "legajo", nullable = true)
+    private Integer legajo;
+    @Column(name = "idSitio", nullable = false)
+    private Integer idSitio;
+    @Column(name = "idDesperfecto", nullable = true)
+    private Integer idDesperfecto;
+    @Column(name = "descripcion", length = 1000, nullable = true)
+    private String descripcion;
+    @Column(name = "estado", length = 30, nullable = true)
+    private String estado;
+    @Column(name = "idReclamoUnificado", nullable = true)
+    private String idReclamoUnificado;
 
     public Reclamos(){
 
@@ -19,8 +33,68 @@ public class Reclamos {
     }
 
     //<editor-fold desc="Getters">
-    public Integer getId(){
-        return this.idReclamo;
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+
+    public Integer getLegajo() {
+        return legajo;
+    }
+
+    public void setLegajo(Integer legajo) {
+        this.legajo = legajo;
+    }
+
+    public Integer getIdSitio() {
+        return idSitio;
+    }
+
+    public void setIdSitio(Integer idSitio) {
+        this.idSitio = idSitio;
+    }
+
+    public Integer getIdDesperfecto() {
+        return idDesperfecto;
+    }
+
+    public void setIdDesperfecto(Integer idDesperfecto) {
+        this.idDesperfecto = idDesperfecto;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getIdReclamoUnificado() {
+        return idReclamoUnificado;
+    }
+
+    public void setIdReclamoUnificado(String idReclamoUnificado) {
+        this.idReclamoUnificado = idReclamoUnificado;
+    }
+
+    public Integer getIdReclamo() {
+        return idReclamo;
+    }
+
+    public void setIdReclamo(Integer idReclamo) {
+        this.idReclamo = idReclamo;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
     //</editor-fold>
 

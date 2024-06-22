@@ -1,12 +1,16 @@
 package application.services;
 
+import application.exceptions.ImagenException;
+import application.exceptions.UsuarioException;
 import application.models.Imagenes;
+import application.models.Usuarios;
 import application.repositories.IImagenesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -26,7 +30,7 @@ public class ImagenesService implements IService<Imagenes, Imagenes> {
 
     @Override
     public Imagenes guardar(Imagenes entity) {
-        return null;
+        return iRepository.save(entity);
     }
 
     @Override
@@ -36,7 +40,26 @@ public class ImagenesService implements IService<Imagenes, Imagenes> {
 
     @Override
     public Imagenes buscarPorId(Integer id) {
-        return null;
+        Optional<Imagenes> ret = iRepository.findByIdImagen(id);
+        return ret.orElse(null);
     }
 
+    public List<Imagenes> listarPorIdDenuncia(Integer idDenuncia) {
+        return iRepository.findByIdDenuncia(idDenuncia);
+    }
+
+    public List<Imagenes> listarPorIdReclamo(Integer idDenuncia) {
+        return iRepository.findByIdReclamo(idDenuncia);
+    }
+    public List<Imagenes> listarPorIdServicio(Integer idServicio) {
+        return iRepository.findByIdServicio(idServicio);
+    }
+
+    public void guardarImagen(Imagenes imagen) throws ImagenException {
+
+        if(false) //wip
+            throw new ImagenException("bla bla");
+
+        guardar(imagen);
+    }
 }

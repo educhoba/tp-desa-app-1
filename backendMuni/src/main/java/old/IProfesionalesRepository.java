@@ -1,6 +1,6 @@
-package application.repositories;
+package old;
 
-import application.models.Profesionales;
+import old.Profesionales;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
