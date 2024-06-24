@@ -1,4 +1,6 @@
 package com.example.myapplication;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -31,6 +33,9 @@ public interface ApiService {
 
     @POST("/personal/cambiarContrasenia")
     Call<Inspector> cambiarContraseniaInspec(@Body Inspector inspector);
+
+    @GET("/servicios/tipo={tipo}")
+    Call<List<Servicios>> listarPorTipo(@Path("tipo") String tipo);
 
 
 }
