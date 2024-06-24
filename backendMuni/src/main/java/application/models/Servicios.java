@@ -2,6 +2,8 @@ package application.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="Servicios")
 public class Servicios {
@@ -23,6 +25,9 @@ public class Servicios {
     private String rubro;
     @Column(name = "descripcion", length = 1000, nullable = false)
     private String descripcion;
+    @OneToMany
+    @JoinColumn(name = "idServicio", referencedColumnName = "idServicios", insertable = false, updatable = false)
+    private List<Imagenes> imagenes;
 
     public Servicios(){
 
@@ -33,7 +38,7 @@ public class Servicios {
     }
 
     //<editor-fold desc="Getters">
-    public Integer getId(){
+    public Integer getidServicios(){
         return this.idServicios;
     }
 
@@ -91,6 +96,14 @@ public class Servicios {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public List<Imagenes> getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(List<Imagenes> imagenes) {
+        this.imagenes = imagenes;
     }
     //</editor-fold>
 

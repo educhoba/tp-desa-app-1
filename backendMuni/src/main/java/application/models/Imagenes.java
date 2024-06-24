@@ -17,7 +17,6 @@ public class Imagenes {
     private Integer idServicio;
     @Column(name = "data")
     private String data;
-
     public Imagenes(){
 
     }

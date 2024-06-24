@@ -1,10 +1,13 @@
 
 package application.controllers;
 
+import application.exceptions.ImagenException;
 import application.exceptions.ReclamoException;
+import application.models.Imagenes;
 import application.models.Reclamos;
 import application.models.Servicios;
 import application.models.Vecinos;
+import application.services.ImagenesService;
 import application.services.ServiciosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +22,8 @@ public class ServiciosController {
 
     @Autowired
     private ServiciosService service;
+    @Autowired
+    private ImagenesService imagenesService; //deberia estar en el controlador
 
     private ServiciosController() { }
 
@@ -42,8 +47,15 @@ public class ServiciosController {
     public ResponseEntity<String> registrar(@RequestBody Servicios servicio){
         try{
             service.registrar(servicio);
+
+            //getimagenes, contar cantidad, error
+            Integer id = servicio.getidServicios();
+            for (Imagenes img : servicio.getImagenes()) {
+                img.setIdServicio(id);
+                imagenesService.guardarImagen(img);
+            }
         }
-        catch (ReclamoException ex){
+        catch (ReclamoException | ImagenException ex){
             return ResponseEntity.badRequest()
                     .body(ex.getMessage());
         }

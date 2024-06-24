@@ -44,12 +44,13 @@ public class ReclamosService implements IService<Reclamos, Reclamos> {
         Optional<Reclamos> ret = iRepository.findByIdReclamo(id);
         return ret.orElse(null);
     }
-    public void registrar(Reclamos reclamos) throws ReclamoException {
+    public Reclamos registrar(Reclamos reclamos) throws ReclamoException {
         //wip
         if(false)
             throw new ReclamoException("Error al registrar.");
 
         guardar(reclamos);
+        return reclamos;
     }
     public void actualizar(Reclamos reclamos) throws ReclamoException {
         //wip

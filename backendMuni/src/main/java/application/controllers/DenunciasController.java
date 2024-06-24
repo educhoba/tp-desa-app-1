@@ -2,8 +2,11 @@
 package application.controllers;
 
 import application.exceptions.DenunciaException;
+import application.exceptions.ImagenException;
 import application.models.Denuncias;
+import application.models.Imagenes;
 import application.services.DenunciasService;
+import application.services.ImagenesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +20,9 @@ public class DenunciasController {
 
     @Autowired
     private DenunciasService service;
+
+    @Autowired
+    private ImagenesService imagenesService; //deberia estar en el controlador
 
     private DenunciasController() { }
 
@@ -39,8 +45,15 @@ public class DenunciasController {
     public ResponseEntity<String> registrar(@RequestBody Denuncias denuncias){
         try{
             service.registrar(denuncias);
+
+            //getimagenes, contar cantidad, error
+            Integer id = denuncias.getIdDenuncias();
+            for (Imagenes img : denuncias.getImagenes()) {
+                img.setIdDenuncia(id);
+                imagenesService.guardarImagen(img);
+            }
         }
-        catch (DenunciaException ex){
+        catch (DenunciaException | ImagenException ex){
             return ResponseEntity.badRequest()
                     .body(ex.getMessage());
         }
