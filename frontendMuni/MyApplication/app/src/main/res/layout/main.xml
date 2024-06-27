@@ -45,6 +45,7 @@
             android:layout_width="210dp"
             android:layout_height="60dp"
             android:text="Comercios"
+            android:textSize="15dp"
             android:backgroundTint="@color/bluelight"
             android:textColor="@color/black"
             />
@@ -54,6 +55,7 @@
             android:layout_width="210dp"
             android:layout_height="60dp"
             android:text="Profesionales"
+            android:textSize="15dp"
             android:backgroundTint="@color/bluelight"
             android:textColor="@color/black"
             />
@@ -62,8 +64,8 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="300px"
+        android:layout_height="30dp"
+        android:layout_marginTop="130dp"
         app:layout_constraintTop_toBottomOf="@+id/opciones">
 
         <Spinner
@@ -82,18 +84,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:visibility="visible"
-        android:layout_marginTop="400px">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="comercios"
-            android:textSize="40dp"
-            android:textStyle="bold"
-            android:paddingLeft="10dp"/>
-
-
+        android:layout_marginTop="160dp">
 
 
     </LinearLayout>
@@ -108,71 +99,21 @@
         android:layout_marginTop="400px">
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PROFESIONALES"
-            android:textSize="40dp"
-            android:textStyle="bold"
-            android:paddingLeft="10dp"/>
-
     </LinearLayout>
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:id="@+id/detalle"
-        android:layout_marginTop="600px">
+        android:layout_marginTop="210dp">
 
-        <TextView
-            android:id="@+id/textViewNombre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:text="Nombre del Comercio"
-            android:paddingBottom="8dp"/>
+        <!-- Otros elementos de tu diseño principal -->
 
-        <TextView
-            android:id="@+id/textViewDireccion"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewServicios"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="Dirección:"
-            android:paddingBottom="4dp"/>
-
-        <TextView
-            android:id="@+id/textViewHorario"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="Horario:"
-            android:paddingBottom="4dp"/>
-
-        <TextView
-            android:id="@+id/textViewTelefono"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="Teléfono:"
-            android:paddingBottom="4dp"/>
-        <TextView
-            android:id="@+id/textViewRubro"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="Rubro:"
-            android:paddingBottom="4dp"/>
-        <TextView
-            android:id="@+id/textViewDescripcion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="Descripción:"
-            android:paddingBottom="4dp"/>
+            android:layout_marginTop="16dp" />
 
     </LinearLayout>
 

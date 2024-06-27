@@ -29,6 +29,8 @@ public class PerfilUser extends AppCompatActivity {
         home = findViewById(R.id.home);
 
         Button btn = findViewById(R.id.Password);
+        Button btn_generar_publicacion = findViewById(R.id.btn_generar_publicacion);
+
 
         config = findViewById(R.id.configImage);
         String cargo = getIntent().getStringExtra("cargo");
@@ -47,12 +49,23 @@ public class PerfilUser extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Button Click", "Button clicked, starting GenerarReclamo activity...");
 
                 Intent intent = new Intent(PerfilUser.this, GenerarReclamo.class);
                 startActivity(intent);
             }
         });
+
+        btn_generar_publicacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(PerfilUser.this, Publicacion.class);
+                startActivity(intent);
+            }
+        });
+
+
+
 
 
     }

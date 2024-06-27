@@ -37,6 +37,8 @@ public interface ApiService {
     @GET("/servicios/tipo={tipo}")
     Call<List<Servicios>> listarPorTipo(@Path("tipo") String tipo);
 
+    @POST("/servicios/registrar")
+    Call<Void> registrarServicio(@Body Servicios servicio);
 
 }
 

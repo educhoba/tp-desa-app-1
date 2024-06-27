@@ -1,5 +1,8 @@
 package com.example.myapplication;
 
+import java.util.List;
+
+
 public class Servicios {
     private Integer idServicios;
     private String tipo;
@@ -10,7 +13,8 @@ public class Servicios {
     private String rubro;
     private String descripcion;
 
-    // Getters y Setters
+    private List<Imagenes> imagenes;
+
     public Integer getIdServicios() {
         return idServicios;
     }
@@ -73,5 +77,13 @@ public class Servicios {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public List<Imagenes> getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(List<Imagenes> imagenes) {
+        this.imagenes = imagenes;
     }
 }

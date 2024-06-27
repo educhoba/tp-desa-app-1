@@ -21,13 +21,19 @@ import java.util.Set;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
 
     private ImageView botonEnviar;
-    private LinearLayout layoutDetalleServicio;
     private Spinner rubroSpinner;
+    private RecyclerView recyclerViewServicios;
+    private ServiciosAdapter serviciosAdapter;
+    private List<Servicios> serviciosList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +45,15 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout linearLayoutComercios = findViewById(R.id.comercios);
         LinearLayout linearLayoutProfesionales = findViewById(R.id.profesionales);
         rubroSpinner = findViewById(R.id.rubroSpinner);
-        layoutDetalleServicio = findViewById(R.id.detalle);
+
+        recyclerViewServicios = findViewById(R.id.recyclerViewServicios);
+        recyclerViewServicios.setLayoutManager(new LinearLayoutManager(this));
+        serviciosAdapter = new ServiciosAdapter(serviciosList);
+        recyclerViewServicios.setAdapter(serviciosAdapter);
 
 
         new ObtenerRubrosUnicosTask().execute("comercio");
+        new ObtenerServiciosTask().execute("comercio");
 
         btncomercios.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 linearLayoutComercios.setVisibility(View.VISIBLE);
                 linearLayoutProfesionales.setVisibility(View.GONE);
                 new ObtenerRubrosUnicosTask().execute("comercio");
+                new ObtenerServiciosTask().execute("comercio");
             }
         });
 
@@ -59,16 +71,19 @@ public class MainActivity extends AppCompatActivity {
                 linearLayoutComercios.setVisibility(View.GONE);
                 linearLayoutProfesionales.setVisibility(View.VISIBLE);
                 new ObtenerRubrosUnicosTask().execute("profesional");
+                new ObtenerServiciosTask().execute("profesional");
+
             }
         });
 
 
         botonEnviar = findViewById(R.id.button);
-
         botonEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new BackgroundTask().execute();
+                // Realiza la acción deseada aquí, como iniciar otra actividad
+                Intent intent = new Intent(MainActivity.this, Login1.class);
+                startActivity(intent);
             }
         });
     }
@@ -136,24 +151,38 @@ public class MainActivity extends AppCompatActivity {
         rubroSpinner.setAdapter(adapter);
     }
 
-    // AsyncTask para realizar alguna tarea en segundo plano
-    private class BackgroundTask extends AsyncTask<Void, Void, Void> {
-
+    private class ObtenerServiciosTask extends AsyncTask<String, Void, List<Servicios>> {
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected List<Servicios> doInBackground(String... params) {
+            String tipo = params[0];
+
+            Retrofit retrofit = RetrofitClient.getClient();
+            ApiService apiService = retrofit.create(ApiService.class);
+
+            Call<List<Servicios>> call = apiService.listarPorTipo(tipo);
 
             try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
+                Response<List<Servicios>> response = call.execute();
+                if (response.isSuccessful() && response.body() != null) {
+                    return response.body();
+                } else {
+                    return null;
+                }
+            } catch (IOException e) {
                 e.printStackTrace();
+                return null;
             }
-            return null;
         }
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            Intent intent = new Intent(MainActivity.this, Login1.class);
-            startActivity(intent);
+        protected void onPostExecute(List<Servicios> servicios) {
+            if (servicios != null) {
+                serviciosList.clear();
+                serviciosList.addAll(servicios);
+                serviciosAdapter.notifyDataSetChanged();
+            } else {
+                Toast.makeText(MainActivity.this, "Error al obtener los servicios", Toast.LENGTH_SHORT).show();
+            }
         }
+
     }
 }
