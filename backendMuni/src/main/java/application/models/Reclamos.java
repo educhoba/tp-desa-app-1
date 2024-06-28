@@ -28,6 +28,9 @@ public class Reclamos {
     @OneToMany
     @JoinColumn(name = "idReclamo", referencedColumnName = "idReclamo", insertable = false, updatable = false)
     private List<Imagenes> imagenes;
+    @OneToMany
+    @JoinColumn(name = "idReclamo", referencedColumnName = "idReclamo", insertable = false, updatable = false)
+    private List<movimientosReclamo> movimientos;
 
 
     public Reclamos(){
@@ -109,6 +112,14 @@ public class Reclamos {
 
     public void setImagenes(List<Imagenes> imagenes) {
         this.imagenes = imagenes;
+    }
+
+    public List<movimientosReclamo> getMovimientos() {
+        return movimientos;
+    }
+
+    public void setMovimientos(List<movimientosReclamo> movimientos) {
+        this.movimientos = movimientos;
     }
     //</editor-fold>
 
