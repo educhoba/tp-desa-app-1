@@ -70,41 +70,4 @@ public class ServiciosAdapter extends RecyclerView.Adapter<ServiciosAdapter.Serv
             tabLayout = itemView.findViewById(R.id.tabLayout);
         }
     }
-
-    private class ImagePagerAdapter extends PagerAdapter {
-        List<Imagenes> imagenesList;
-
-        public ImagePagerAdapter(List<Imagenes> imagenesList) {
-            this.imagenesList = imagenesList;
-        }
-
-        @Override
-        public int getCount() {
-            return imagenesList.size();
-        }
-
-        @Override
-        public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-            return view == object;
-        }
-
-        @NonNull
-        @Override
-        public Object instantiateItem(@NonNull ViewGroup container, int position) {
-            ImageView imageView = new ImageView(container.getContext());
-            // Cargar imagen usando Picasso, Glide u otra biblioteca de carga de imágenes
-            // Por ejemplo:
-            // Glide.with(container.getContext()).load(imagenesList.get(position).getUrl()).into(imageView);
-            container.addView(imageView);
-            return imageView;
-        }
-
-        @Override
-        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-            container.removeView((View) object);
-        }
-    }
-
-
-
 }
