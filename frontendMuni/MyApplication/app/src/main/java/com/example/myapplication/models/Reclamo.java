@@ -27,6 +27,7 @@ public class Reclamo {
     @SerializedName("movimientos")
     private List<MovimientoReclamo> movimientos; // Asegúrate de tener la clase Movimiento definida correctamente si es un tipo complejo
 
+    private SitiosManuales sitioManual;
     public Reclamo() {
         // Constructor vacío requerido por Retrofit
     }
@@ -110,4 +111,13 @@ public class Reclamo {
     public void setMovimientos(List<MovimientoReclamo> movimientos) {
         this.movimientos = movimientos;
     }
+
+    public SitiosManuales getSitioManual() {
+        return sitioManual;
+    }
+
+    public void setSitioManual(SitiosManuales sitioManual) {
+        this.sitioManual = sitioManual;
+    }
+
 }

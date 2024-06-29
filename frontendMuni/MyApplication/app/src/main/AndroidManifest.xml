@@ -25,6 +25,8 @@
         <activity android:name=".activities.configuracion"></activity>
         <activity android:name=".activities.GenerarReclamo"></activity>
         <activity android:name=".models.Publicacion"></activity>
+        <activity android:name=".activities.VerReclamos"></activity>
+        <activity android:name=".activities.VerDetalleReclamo"></activity>
 
 
 

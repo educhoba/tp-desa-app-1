@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_main);
 
         Button btncomercios = findViewById(R.id.btncomercios);
         Button btnprofesionales = findViewById(R.id.btnprofesionales);

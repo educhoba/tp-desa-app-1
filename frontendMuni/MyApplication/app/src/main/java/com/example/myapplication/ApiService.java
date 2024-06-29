@@ -3,6 +3,7 @@ import com.example.myapplication.models.Inspector;
 import com.example.myapplication.models.Servicios;
 import com.example.myapplication.models.Usuarios;
 import com.example.myapplication.models.Vecinos;
+import com.example.myapplication.models.Reclamo;
 
 import java.util.List;
 
@@ -44,6 +45,12 @@ public interface ApiService {
 
     @POST("/servicios/registrar")
     Call<Void> registrarServicio(@Body Servicios servicio);
+
+    @GET("/reclamos")
+    Call<List<Reclamo>> getReclamos();
+
+    @GET("/reclamos/{id}")
+    Call<Reclamo> getReclamoById(@Path("id") int id);
 
 }
 
