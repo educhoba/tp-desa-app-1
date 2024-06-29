@@ -1,4 +1,4 @@
-package com.example.myapplication.models;
+package com.example.myapplication.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,6 +30,8 @@ import android.graphics.BitmapFactory;
 import com.example.myapplication.ApiService;
 import com.example.myapplication.R;
 import com.example.myapplication.RetrofitClient;
+import com.example.myapplication.models.Imagenes;
+import com.example.myapplication.models.Servicios;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -142,9 +144,6 @@ public class Publicacion extends AppCompatActivity {
 
         return Bitmap.createScaledBitmap(bitmap, width, height, true);
     }
-
-
-
 
     private void generarPublicacion () {
         // Datos del formulario

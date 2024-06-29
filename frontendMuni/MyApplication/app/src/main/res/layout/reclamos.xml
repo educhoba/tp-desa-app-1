@@ -96,8 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="26dp"
                     android:text="Carga con opciones"
-                    android:textSize="12dp"
-                    android:checked="true"/>
+                    android:textSize="12dp"/>
 
                 <RadioButton
                     android:id="@+id/manualRadio"
@@ -107,11 +106,6 @@
                     android:textSize="12dp"/>
 
             </RadioGroup>
-            <Spinner
-                android:id="@+id/spinner1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"/>
             <Spinner
                 android:id="@+id/spinner2"
                 android:layout_width="match_parent"
@@ -127,19 +121,11 @@
                 android:orientation="vertical"
                 android:visibility="gone">
                 <Spinner
-                    android:id="@+id/spinner3"
+                    android:id="@+id/spinner1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"/>
 
-
-                <EditText
-                    android:id="@+id/comentariosAuto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Comentarios"
-                    android:textSize="15dp"
-                    android:layout_marginTop="20dp"/>
 
 
             </LinearLayout>
@@ -161,21 +147,30 @@
                     android:textSize="15dp"
                     android:layout_marginTop="10dp"/>
 
-                <EditText
+                <!--<EditText
                     android:id="@+id/comentariosManual"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Comentarios"
                     android:textSize="15dp"
                     android:layout_marginTop="10dp"/>
-
+                -->
 
             </LinearLayout>
 
 
+            <EditText
+                android:id="@+id/comentariosAuto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Descripción del reclamo"
+                android:textSize="15dp"
+                android:layout_marginTop="20dp"/>
+
 
 
             <Button
+                android:id="@+id/buttonImage"
                 android:layout_width="wrap_content"
                 android:layout_height="33dp"
                 android:backgroundTint="@color/blue"

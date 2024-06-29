@@ -19,6 +19,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +29,7 @@ import com.example.myapplication.ApiService;
 import com.example.myapplication.R;
 import com.example.myapplication.RetrofitClient;
 import com.example.myapplication.ServiciosAdapter;
+import com.example.myapplication.models.Desperfectos;
 import com.example.myapplication.models.Servicios;
 
 
@@ -89,6 +91,38 @@ public class MainActivity extends AppCompatActivity {
                 // Realiza la acción deseada aquí, como iniciar otra actividad
                 Intent intent = new Intent(MainActivity.this, Login1.class);
                 startActivity(intent);
+            }
+        });
+
+        probarCall();
+
+    }
+
+    private void probarCall() {
+        Retrofit retrofit = RetrofitClient.getClient();
+        ApiService service = retrofit.create(ApiService.class);
+
+        Call<List<Desperfectos>> call = service.listarDesperfectos();
+        call.enqueue(new Callback<List<Desperfectos>>() {
+            @Override
+            public void onResponse(Call<List<Desperfectos>> call, Response<List<Desperfectos>> response) {
+                if (response.isSuccessful()) {
+                    List<Desperfectos> sitiosList = response.body();
+                    if (sitiosList != null) {
+                        // Process the sitiosList here
+                        for (Desperfectos sitio : sitiosList) {
+                            Toast.makeText(MainActivity.this,"ID: " + sitio.getIdDesperfecto() + ", Descripcion: " + sitio.getDescripcion(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                } else {
+                    Toast.makeText(MainActivity.this, "Response unsuccessful. Code: " + response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Desperfectos>> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Failed to fetch data: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+
             }
         });
     }

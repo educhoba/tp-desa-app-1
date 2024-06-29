@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
-import com.example.myapplication.models.Publicacion;
 import com.example.myapplication.models.Usuarios;
 
 

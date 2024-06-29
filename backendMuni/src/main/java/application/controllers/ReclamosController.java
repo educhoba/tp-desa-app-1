@@ -70,7 +70,7 @@ public class ReclamosController {
                     .body(ex.getMessage());
         }
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Reclamo registrado.");
+                .body("Reclamo registrado. #" +reclamos.getIdReclamo());
     }
     @PostMapping("/actualizar")
     public ResponseEntity<String> actualizar(@RequestBody Reclamos reclamos){

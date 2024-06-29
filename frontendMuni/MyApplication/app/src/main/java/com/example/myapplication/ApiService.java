@@ -1,6 +1,9 @@
 package com.example.myapplication;
+import com.example.myapplication.models.Desperfectos;
 import com.example.myapplication.models.Inspector;
+import com.example.myapplication.models.Reclamo;
 import com.example.myapplication.models.Servicios;
+import com.example.myapplication.models.Sitios;
 import com.example.myapplication.models.Usuarios;
 import com.example.myapplication.models.Vecinos;
 import com.example.myapplication.models.Reclamo;
@@ -52,5 +55,12 @@ public interface ApiService {
     @GET("/reclamos/{id}")
     Call<Reclamo> getReclamoById(@Path("id") int id);
 
+    @POST("/reclamos/registrar")
+    Call<Void> registrarReclamo(@Body Reclamo reclamo);
+
+    @GET("/sitios")
+    Call<List<Sitios>> listarSitios();
+    @GET("/desperfectos")
+    Call<List<Desperfectos>> listarDesperfectos();
 }
 

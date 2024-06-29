@@ -26,8 +26,9 @@ public class Reclamo {
     private List<Imagenes> imagenes; // Asegúrate de tener la clase Imagen definida correctamente si es un tipo complejo
     @SerializedName("movimientos")
     private List<MovimientoReclamo> movimientos; // Asegúrate de tener la clase Movimiento definida correctamente si es un tipo complejo
+    @SerializedName("sitioManual")
+    private SitiosManuales sitioManual; // Asegúrate de tener la clase Movimiento definida correctamente si es un tipo complejo
 
-    private SitiosManuales sitioManual;
     public Reclamo() {
         // Constructor vacío requerido por Retrofit
     }

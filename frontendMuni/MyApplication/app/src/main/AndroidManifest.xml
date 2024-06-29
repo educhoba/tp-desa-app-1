@@ -24,9 +24,9 @@
         <activity android:name=".activities.PerfilInspector"></activity>
         <activity android:name=".activities.configuracion"></activity>
         <activity android:name=".activities.GenerarReclamo"></activity>
-        <activity android:name=".models.Publicacion"></activity>
         <activity android:name=".activities.VerReclamos"></activity>
         <activity android:name=".activities.VerDetalleReclamo"></activity>
+        <activity android:name=".activities.Publicacion"></activity>
 
 
 
