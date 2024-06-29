@@ -112,30 +112,69 @@
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:padding="5dp"/>
-            <EditText
+
+
+            <!-- Si carga comercios-->
+            <LinearLayout
+                android:id="@+id/options"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/Nombre"
-                android:hint="Nombre"
-                android:padding="8dp"
-                android:textColor="@color/black"
-                android:layout_marginTop="10dp"/>
-            <EditText
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/nombrecom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nombre"
+                    android:textSize="15dp"
+                    android:layout_marginTop="10dp"/>
+
+                <Spinner
+                    android:id="@+id/spinner1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"/>
+
+
+                <EditText
+                    android:id="@+id/comentariosAuto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Descripcion"
+                    android:textSize="15dp"
+                    android:layout_marginTop="20dp"/>
+
+            </LinearLayout>
+
+            <!-- Si carga vecinos-->
+            <LinearLayout
+                android:id="@+id/vecinos"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/Direccion"
-                android:hint="Dirección"
-                android:padding="8dp"
-                android:textColor="@color/black"
-                android:layout_marginTop="10dp"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/descripcion"
-                android:hint="Descripción"
-                android:paddingBottom="50dp"
-                android:textColor="@color/black"
-                android:layout_marginTop="10dp"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+
+                <EditText
+                    android:id="@+id/Docveci"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Documento del vecino"
+                    android:textSize="15dp"
+                    android:layout_marginTop="10dp"/>
+
+                <EditText
+                    android:id="@+id/Descveci"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Descripcion"
+                    android:textSize="15dp"
+                    android:layout_marginTop="10dp"/>
+
+
+            </LinearLayout>
+
 
             <Button
                 android:layout_width="wrap_content"

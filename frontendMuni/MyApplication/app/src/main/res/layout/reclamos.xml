@@ -107,6 +107,17 @@
                     android:textSize="12dp"/>
 
             </RadioGroup>
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"/>
+            <Spinner
+                android:id="@+id/spinner2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"/>
+
 
             <!-- Si carga con opciones-->
             <LinearLayout
@@ -114,27 +125,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
+                <Spinner
+                    android:id="@+id/spinner3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"/>
 
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"/>
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"/>
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"/>
 
                 <EditText
+                    android:id="@+id/comentariosAuto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Comentarios"
                     android:textSize="15dp"
                     android:layout_marginTop="20dp"/>
+
 
             </LinearLayout>
 
@@ -144,21 +150,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
+
 
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Rubro"
-                    android:textSize="15dp"
-                    android:layout_marginTop="10dp"/>
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Desperfecto"
-                    android:textSize="15dp"
-                    android:layout_marginTop="10dp"/>
-                <EditText
+                    android:id="@+id/sitioDireccionManual"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Sitio/dirección"
@@ -166,11 +162,13 @@
                     android:layout_marginTop="10dp"/>
 
                 <EditText
+                    android:id="@+id/comentariosManual"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Comentarios"
                     android:textSize="15dp"
                     android:layout_marginTop="10dp"/>
+
 
             </LinearLayout>
 
@@ -193,6 +191,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btnGenerar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"

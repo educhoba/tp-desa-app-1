@@ -24,13 +24,19 @@ import androidx.annotation.Nullable;
 import retrofit2.Retrofit;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+
+
 public class Publicacion extends AppCompatActivity {
 
     private EditText editTextNombre, editTextDireccion, editTextHorario, editTextTelefono, editTextRubro, editTextDescripcion;
     private RadioGroup radioGroup;
     private Button buttonGenerar, buttonImage;
 
-    private List<Imagenes> listaImagenes = new ArrayList<>();
+    private List<Imagenes> listaImagenesBase64 = new ArrayList<>();
     private static final int REQUEST_CODE_SELECT_IMAGES = 5;
 
 
@@ -64,7 +70,6 @@ public class Publicacion extends AppCompatActivity {
             }
         });
 
-
     }
 
     private void seleccionarImagenes() {
@@ -82,21 +87,62 @@ public class Publicacion extends AppCompatActivity {
                 int count = data.getClipData().getItemCount();
                 for (int i = 0; i < count; i++) {
                     Uri imageUri = data.getClipData().getItemAt(i).getUri();
-                    Imagenes imagen = new Imagenes();
-                    imagen.setData(imageUri.toString());
-                    listaImagenes.add(imagen);
+                    processImageUri(imageUri);
                 }
             } else if (data.getData() != null) {
                 Uri imageUri = data.getData();
-                Imagenes imagen = new Imagenes();
-                imagen.setData(imageUri.toString());
-                listaImagenes.add(imagen);
+                processImageUri(imageUri);
             }
         }
     }
 
+    private void processImageUri(Uri imageUri) {
+        try {
+            InputStream imageStream = getContentResolver().openInputStream(imageUri);
+            Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+
+            // Comprimir la imagen y convertirla a Base64
+            String imageBase64 = compressAndEncodeImage(selectedImage);
+
+            // Crear un objeto Imagenes y agregarlo a la lista
+            Imagenes imagen = new Imagenes();
+            imagen.setData(imageBase64);
+            listaImagenesBase64.add(imagen);
+
+            Toast.makeText(this, "Imagen añadida", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Error al seleccionar la imagen", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // Método para comprimir y convertir la imagen a Base64
+    private String compressAndEncodeImage(Bitmap bitmap) {
+        Bitmap resizedBitmap = resizeBitmap(bitmap, 800, 600); // Redimensionar según sea necesario
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        resizedBitmap.compress(Bitmap.CompressFormat.PNG, 80, stream); // Comprimir la imagen en formato PNG
+
+        byte[] byteArray = stream.toByteArray();
+        return android.util.Base64.encodeToString(byteArray, android.util.Base64.DEFAULT);
+    }
+
+    // Método para redimensionar la imagen
+    private Bitmap resizeBitmap(Bitmap bitmap, int maxWidth, int maxHeight) {
+        float ratio = Math.min(
+                (float) maxWidth / bitmap.getWidth(),
+                (float) maxHeight / bitmap.getHeight());
+        int width = Math.round((float) ratio * bitmap.getWidth());
+        int height = Math.round((float) ratio * bitmap.getHeight());
+
+        return Bitmap.createScaledBitmap(bitmap, width, height, true);
+    }
+
+
+
+
     private void generarPublicacion () {
-        // Obtener datos del formulario
+        // Datos del formulario
         String nombre = editTextNombre.getText().toString();
         String direccion = editTextDireccion.getText().toString();
         String horario = editTextHorario.getText().toString();
@@ -111,6 +157,7 @@ public class Publicacion extends AppCompatActivity {
             return;
         }
 
+        // Preparar objeto Servicios con los datos y las imágenes en Base64
         Servicios servicio = new Servicios();
         servicio.setTipo(tipo);
         servicio.setNombre(nombre);
@@ -119,7 +166,7 @@ public class Publicacion extends AppCompatActivity {
         servicio.setTelefono(telefono);
         servicio.setRubro(rubro);
         servicio.setDescripcion(descripcion);
-        servicio.setImagenes(listaImagenes);
+        servicio.setImagenes(listaImagenesBase64); // Aquí se setean las imágenes en Base64
 
         // Ejecutar AsyncTask para realizar la solicitud de registro
         new RegistrarServicioTask().execute(servicio);
@@ -151,7 +198,6 @@ public class Publicacion extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
-                        // Manejar la respuesta exitosa
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -160,7 +206,6 @@ public class Publicacion extends AppCompatActivity {
                             }
                         });
                     } else {
-                        // Manejar errores en la respuesta
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -172,7 +217,6 @@ public class Publicacion extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
-                    // Manejar fallos en la solicitud
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -194,7 +238,7 @@ public class Publicacion extends AppCompatActivity {
         editTextRubro.setText("");
         editTextDescripcion.setText("");
         radioGroup.clearCheck();
-        listaImagenes.clear();
+        listaImagenesBase64.clear();
     }
 
 }

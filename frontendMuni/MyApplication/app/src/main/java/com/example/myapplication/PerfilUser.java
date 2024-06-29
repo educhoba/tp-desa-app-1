@@ -30,6 +30,8 @@ public class PerfilUser extends AppCompatActivity {
 
         Button btn = findViewById(R.id.Password);
         Button btn_generar_publicacion = findViewById(R.id.btn_generar_publicacion);
+        Button btn_generar_reclamo = findViewById(R.id.Password);
+
 
 
         config = findViewById(R.id.configImage);
@@ -60,6 +62,15 @@ public class PerfilUser extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(PerfilUser.this, Publicacion.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_generar_reclamo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(PerfilUser.this, GenerarReclamo.class);
                 startActivity(intent);
             }
         });
