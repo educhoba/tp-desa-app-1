@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.activities;
 
 import android.os.Bundle;
 import android.content.Intent;
@@ -13,6 +13,11 @@ import retrofit2.Retrofit;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication.ApiService;
+import com.example.myapplication.R;
+import com.example.myapplication.RetrofitClient;
+import com.example.myapplication.models.Usuarios;
 
 public class Login3 extends AppCompatActivity {
     private String codigoEnviado;

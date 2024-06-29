@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
-import com.bumptech.glide.Glide;
+import com.example.myapplication.models.Imagenes;
 
 import java.util.List;
 

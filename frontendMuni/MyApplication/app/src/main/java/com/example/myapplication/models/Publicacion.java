@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.models;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +26,11 @@ import retrofit2.Retrofit;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+
+import com.example.myapplication.ApiService;
+import com.example.myapplication.R;
+import com.example.myapplication.RetrofitClient;
+
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 

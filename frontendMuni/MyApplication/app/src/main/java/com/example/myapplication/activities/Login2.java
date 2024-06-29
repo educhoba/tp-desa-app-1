@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +11,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication.ApiService;
+import com.example.myapplication.R;
+import com.example.myapplication.RetrofitClient;
+import com.example.myapplication.models.Inspector;
+import com.example.myapplication.models.Usuarios;
 
 import java.io.IOException;
 import java.security.SecureRandom;

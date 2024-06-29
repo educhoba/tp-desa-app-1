@@ -1,11 +1,10 @@
-package com.example.myapplication;
+package com.example.myapplication.activities;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 import java.security.SecureRandom;
@@ -17,6 +16,11 @@ import android.content.DialogInterface;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication.ApiService;
+import com.example.myapplication.R;
+import com.example.myapplication.RetrofitClient;
+import com.example.myapplication.models.Usuarios;
 
 public class Registrarse extends AppCompatActivity {
 

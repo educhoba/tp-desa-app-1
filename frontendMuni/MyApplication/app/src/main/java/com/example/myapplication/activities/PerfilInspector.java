@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,9 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication.R;
+import com.example.myapplication.models.Inspector;
 
 public class PerfilInspector extends AppCompatActivity {
     ImageView btn_back;

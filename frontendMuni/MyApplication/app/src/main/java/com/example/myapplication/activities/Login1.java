@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.activities;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -10,6 +10,13 @@ import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication.ApiService;
+import com.example.myapplication.R;
+import com.example.myapplication.RetrofitClient;
+import com.example.myapplication.models.Inspector;
+import com.example.myapplication.models.Usuarios;
+import com.example.myapplication.models.Vecinos;
 
 import java.io.IOException;
 import retrofit2.Response;

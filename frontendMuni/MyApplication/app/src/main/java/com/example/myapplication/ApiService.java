@@ -1,4 +1,9 @@
 package com.example.myapplication;
+import com.example.myapplication.models.Inspector;
+import com.example.myapplication.models.Servicios;
+import com.example.myapplication.models.Usuarios;
+import com.example.myapplication.models.Vecinos;
+
 import java.util.List;
 
 import retrofit2.Call;

@@ -1,18 +1,17 @@
-package com.example.myapplication;
+package com.example.myapplication.activities;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
-import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication.R;
+import com.example.myapplication.models.Reclamo;
 
 public class GenerarReclamo extends AppCompatActivity {
 
@@ -42,8 +41,6 @@ public class GenerarReclamo extends AppCompatActivity {
 
         comentariosAuto = findViewById(R.id.comentariosManual);
         comentariosManual = findViewById(R.id.comentariosManual);
-        rubroManual = findViewById(R.id.rubroManual);
-        desperfectoManual = findViewById(R.id.desperfectoManual);
         sitioDireccionManual = findViewById(R.id.sitioDireccionManual);
 
 
@@ -95,7 +92,7 @@ public class GenerarReclamo extends AppCompatActivity {
         // Crear objeto Reclamo
         Reclamo reclamo = new Reclamo();
         reclamo.setDescripcion(comentarios);
-        reclamo.setIdDesperfecto(desperfecto);
+        //reclamo.setIdDesperfecto(desperfecto);
 
         // Aquí debes llamar a tu método Retrofit para enviar el reclamo al backend
         enviarReclamo(reclamo);

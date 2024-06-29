@@ -1,14 +1,16 @@
-package com.example.myapplication;
+package com.example.myapplication.activities;
 
 import android.os.Bundle;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+
+import com.example.myapplication.R;
+import com.example.myapplication.models.Publicacion;
+import com.example.myapplication.models.Usuarios;
 
 
 public class PerfilUser extends AppCompatActivity {
