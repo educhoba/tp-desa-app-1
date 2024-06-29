@@ -63,4 +63,8 @@ public class DenunciasService implements IService<Denuncias, Denuncias> {
     public List<Denuncias> listarPorDocumento(String documento) {
         return iRepository.findByDocumento(documento);
     }
+
+    public List<Denuncias> listarPorDenunciado(String documento) {
+        return iRepository.findByDenunciado(documento);
+    }
 }

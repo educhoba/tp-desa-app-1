@@ -10,4 +10,5 @@ public interface IDenunciasRepository extends JpaRepository<Denuncias,Long> {
     public Optional<Denuncias> findByIdDenuncias(Integer integer);
 
     public List<Denuncias> findByDocumento(String documento);
+    public List<Denuncias> findByDenunciado(String documento);
 }

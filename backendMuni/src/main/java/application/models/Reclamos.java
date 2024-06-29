@@ -32,6 +32,10 @@ public class Reclamos {
     @JoinColumn(name = "idReclamo", referencedColumnName = "idReclamo", insertable = false, updatable = false)
     private List<movimientosReclamo> movimientos;
 
+    @OneToOne
+    @JoinColumn(name = "idReclamo", referencedColumnName = "idReclamo", insertable = false, updatable = false)
+    private SitiosManuales sitioManual;
+
 
     public Reclamos(){
 
@@ -120,6 +124,14 @@ public class Reclamos {
 
     public void setMovimientos(List<movimientosReclamo> movimientos) {
         this.movimientos = movimientos;
+    }
+
+    public SitiosManuales getSitioManual() {
+        return sitioManual;
+    }
+
+    public void setSitioManual(SitiosManuales sitioManual) {
+        this.sitioManual = sitioManual;
     }
     //</editor-fold>
 

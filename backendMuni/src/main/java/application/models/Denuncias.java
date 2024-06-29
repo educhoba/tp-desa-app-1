@@ -28,6 +28,8 @@ public class Denuncias {
     @OneToMany
     @JoinColumn(name = "idDenuncia", referencedColumnName = "idDenuncias", insertable = false, updatable = false)
     private List<movimientosDenuncia> movimientos;
+    @Column(name = "denunciado", length = 20, nullable = true)
+    private String denunciado;
 
     public Denuncias(){
 
@@ -101,6 +103,14 @@ public class Denuncias {
 
     public void setMovimientos(List<movimientosDenuncia> movimientos) {
         this.movimientos = movimientos;
+    }
+
+    public String getDenunciado() {
+        return denunciado;
+    }
+
+    public void setDenunciado(String denunciado) {
+        this.denunciado = denunciado;
     }
     //</editor-fold>
 

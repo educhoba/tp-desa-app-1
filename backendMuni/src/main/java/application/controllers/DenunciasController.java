@@ -82,5 +82,15 @@ public class DenunciasController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+    @GetMapping("/listarPorDenunciado/{documento}")
+    public ResponseEntity<List<Denuncias>> listarPorDenunciado(@PathVariable String documento) {
+        List<Denuncias> obj = service.listarPorDenunciado(documento);
+        if(obj != null){
+            return ResponseEntity.ok(obj);
+        }
+        else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 }
 
