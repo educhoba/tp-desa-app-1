@@ -51,6 +51,7 @@ public class GenerarDenuncia extends AppCompatActivity {
     private EditText descripcionDenunciaText;
     private EditText documentoVecinoDenunciadoText;
     private EditText nombreComercioDenunciadoText;
+    private Integer SitioManualIdHardcodeado = 1;
     private CheckBox checkAcepto;
 
     private RadioGroup radioGroup;
@@ -81,10 +82,10 @@ public class GenerarDenuncia extends AppCompatActivity {
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.optionsRadio) {
+                if (checkedId == R.id.optionsVecino) {
                     sectionVecino.setVisibility(View.VISIBLE);
                     sectionComercio.setVisibility(View.GONE);
-                } else if (checkedId == R.id.manualRadio) {
+                } else if (checkedId == R.id.optionsComercio) {
                     sectionVecino.setVisibility(View.GONE);
                     sectionComercio.setVisibility(View.VISIBLE);
                 }
@@ -110,6 +111,7 @@ public class GenerarDenuncia extends AppCompatActivity {
     }
 
     private void generarDenuncia() {
+
             // Obtener los datos del formulario según el modo seleccionado
             String tipoDenuncia = obtenerTipoDenuncia();
             Integer desperfectoId = -1;
@@ -117,14 +119,14 @@ public class GenerarDenuncia extends AppCompatActivity {
             String sitioDireccion = "";
             String comentarios = "";
 
-            // Crear objeto Reclamo
-            Reclamos reclamo = new Reclamos();
+            // Crear objeto Denuncias
+            Denuncias denuncia = new Denuncias();
             if (tipoDenuncia.equals("vecino")) {
-                if(false){
+                if(SitioManualIdHardcodeado < 1){
+                    //chequear algo
                     Toast.makeText(GenerarDenuncia.this, "Seleccione un sitio.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
 
             } else if (tipoDenuncia.equals("comercio")) {
                 if(false){
@@ -137,20 +139,11 @@ public class GenerarDenuncia extends AppCompatActivity {
                 return;
             }
 
-            if(DesperfectoSeleccionado < 1){
-                Toast.makeText(GenerarDenuncia.this, "Seleccione un desperfecto.", Toast.LENGTH_SHORT).show();
-                return;
-            }
 
-            reclamo.setIdDesperfecto(DesperfectoSeleccionado);
 
-            comentarios = comentariosAuto.getText().toString();
+            denuncia.setImagenes(listaImagenesBase64);
 
-            reclamo.setDescripcion(comentarios);
-
-            reclamo.setImagenes(listaImagenesBase64);
-
-            new RegistrarReclamoTask().execute(reclamo);
+            new RegistrarDenunciaTask().execute(denuncia);
     }
 
     // Método para obtener el modo de carga seleccionado
@@ -164,6 +157,7 @@ public class GenerarDenuncia extends AppCompatActivity {
             return "";
         }
     }
+
 
 
     private class ObtenerSitiosUnicosTask extends AsyncTask<String, Void, List<Sitios>> {
@@ -251,101 +245,6 @@ public class GenerarDenuncia extends AppCompatActivity {
                     // Aquí puedes realizar cualquier acción con el Sitios seleccionado
 
                     //Toast.makeText(GenerarReclamo.this, "ID Sitios seleccionado: " + SitioSeleccionado, Toast.LENGTH_SHORT).show();
-
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // Método requerido pero puedes dejarlo vacío si no necesitas hacer nada específico aquí
-            }
-        });
-    }
-
-    private class ObtenerDesperfectosUnicosTask extends AsyncTask<String, Void, List<Desperfectos>> {
-        @Override
-        protected List<Desperfectos> doInBackground(String... params) {
-
-            Retrofit retrofit = RetrofitClient.getClient();
-            ApiService apiService = retrofit.create(ApiService.class);
-
-            Call<List<Desperfectos>> call = apiService.listarDesperfectos();
-
-            try {
-                Response<List<Desperfectos>> response = call.execute();
-                if (response.isSuccessful() && response.body() != null) {
-                    List<Desperfectos> body = response.body();
-
-                    return new ArrayList<>(body);
-                } else {
-                    return null;
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(List<Desperfectos> desperfectos) {
-            if (desperfectos != null) {
-                configurarSpinnerDesperfectos(desperfectos);
-            } else {
-                Toast.makeText(GenerarDenuncia.this, "Error al obtener los datos", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    private void configurarSpinnerDesperfectos(List<Desperfectos> desperfectos) {
-        // Crear una lista de descripciones para el spinner
-        List<String> list = new ArrayList<>();
-        list.add(0, "Elija el desperfecto"); // Agregar primer elemento como opción por defecto
-
-        // Iterar sobre la lista de Sitios y añadir las descripciones al list
-        for (Desperfectos s : desperfectos) {
-            list.add(s.getDescripcion());
-        }
-
-        // Crear un ArrayAdapter personalizado para el spinner
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list) {
-            @Override
-            public boolean isEnabled(int position) {
-                return position != 0; // Permitir seleccionar todos los elementos menos el primero (índice 0)
-            }
-
-            @Override
-            public View getDropDownView(int position, View convertView, ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView textView = (TextView) view;
-
-                // Cambiar el color del texto del primer elemento (opción por defecto)
-                if (position == 0) {
-                    textView.setTextColor(Color.GRAY);
-                } else {
-                    textView.setTextColor(Color.BLACK);
-                }
-
-                return view;
-            }
-        };
-
-        // Especificar el layout para las opciones desplegables
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // Asignar el adaptador al Spinner
-        spinner2.setAdapter(adapter);
-
-        // Manejar la selección del Spinner
-        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position > 0) {
-                    Desperfectos selectedDesperfecto = desperfectos.get(position - 1); // Obtener el Sitios seleccionado
-                    DesperfectoSeleccionado = selectedDesperfecto.getIdDesperfecto(); // Obtener el ID del Sitios seleccionado
-
-                    // Aquí puedes realizar cualquier acción con el Sitios seleccionado
-
-                    //Toast.makeText(GenerarReclamo.this, "ID Desperfecto seleccionado: " + DesperfectoSeleccionado, Toast.LENGTH_SHORT).show();
 
                 }
             }

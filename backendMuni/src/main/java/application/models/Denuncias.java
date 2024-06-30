@@ -30,7 +30,6 @@ public class Denuncias {
     private List<movimientosDenuncia> movimientos;
     @Column(name = "denunciado", length = 20, nullable = true)
     private String denunciado;
-
     public Denuncias(){
 
     }
