@@ -46,11 +46,8 @@ public class ReclamosAdapter extends RecyclerView.Adapter<ReclamosAdapter.ViewHo
         holder.textViewDesperfecto.setText("Desperfecto: " + reclamo.getIdDesperfecto());
         holder.textViewDescripcion.setText("Descripción: " + reclamo.getDescripcion());
         int id = reclamo.getIdReclamo();
-/*
-        ImagePagerAdapter adapter = new ImagePagerAdapter(reclamo.getImagenes());
-        holder.viewPager.setAdapter(adapter);
-        holder.tabLayout.setupWithViewPager(holder.viewPager, true);
-*/
+
+
         // Configurar el botón "Ver detalle" si es necesario
         holder.buttonVerDetalle.setOnClickListener(v -> {
             Intent intent = new Intent(holder.itemView.getContext(), VerDetalleReclamos.class);
@@ -81,9 +78,7 @@ public class ReclamosAdapter extends RecyclerView.Adapter<ReclamosAdapter.ViewHo
             textViewDesperfecto = itemView.findViewById(R.id.textViewDesperfecto);
             textViewDescripcion = itemView.findViewById(R.id.textViewDescripcion);
             buttonVerDetalle = itemView.findViewById(R.id.buttonVerDetalle);
-            /*
-            viewPager = itemView.findViewById(R.id.viewPager);
-            tabLayout = itemView.findViewById(R.id.tabLayout);*/
+
         }
     }
 }

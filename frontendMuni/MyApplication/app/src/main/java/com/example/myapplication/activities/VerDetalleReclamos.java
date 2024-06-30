@@ -15,7 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
+import com.example.myapplication.ImagePagerAdapter;
 import com.example.myapplication.models.Reclamos;
 import com.example.myapplication.ApiService;
 import com.example.myapplication.RetrofitClient;
@@ -30,12 +32,15 @@ import com.example.myapplication.ApiService;
 import com.example.myapplication.R;
 import com.example.myapplication.RetrofitClient;
 import com.example.myapplication.models.Reclamos;
+import com.google.android.material.tabs.TabLayout;
 
 public class VerDetalleReclamos extends AppCompatActivity {
 
 
     private TextView textViewId, textViewSitio, textViewDesperfecto, textViewDescripcion;
     private int reclamoId;
+    ViewPager viewPager;
+    TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,8 @@ public class VerDetalleReclamos extends AppCompatActivity {
         textViewSitio = findViewById(R.id.textSitio);
         textViewDesperfecto = findViewById(R.id.textDesperfecto);
         textViewDescripcion = findViewById(R.id.textDescripcion);
+        viewPager = findViewById(R.id.viewPager);
+        tabLayout = findViewById(R.id.tabLayout);
 
         // Obtener el ID del reclamo del Intent
         reclamoId = getIntent().getIntExtra("RECLAMO_ID", -1);
@@ -83,6 +90,9 @@ public class VerDetalleReclamos extends AppCompatActivity {
                 textViewSitio.setText("Sitio: " + reclamo.getIdSitio());
                 textViewDesperfecto.setText("Desperfecto: " + reclamo.getIdDesperfecto());
                 textViewDescripcion.setText("Descripción: " + reclamo.getDescripcion());
+                ImagePagerAdapter adapter = new ImagePagerAdapter(reclamo.getImagenes());
+                viewPager.setAdapter(adapter);
+                tabLayout.setupWithViewPager(viewPager, true);
             } else {
                 Toast.makeText(VerDetalleReclamos.this, "Error al obtener detalles del reclamo", Toast.LENGTH_SHORT).show();
             }
