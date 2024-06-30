@@ -58,6 +58,11 @@ public interface ApiService {
     @POST("/reclamos/registrar")
     Call<Void> registrarReclamo(@Body Reclamos reclamo);
 
+    @GET("/denuncias")
+    Call<List<Denuncias>> getDenuncias();
+
+    @GET("/denuncias/{id}")
+    Call<Denuncias> getDenunciaById(@Path("id") int id);
     @POST("/denuncias/registrar")
     Call<Void> registrarDenuncia(@Body Denuncias denuncia);
 

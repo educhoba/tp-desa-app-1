@@ -26,12 +26,10 @@
         <activity android:name=".activities.GenerarReclamo"></activity>
         <activity android:name=".activities.GenerarDenuncia"></activity>
         <activity android:name=".activities.VerReclamos"></activity>
+        <activity android:name=".activities.VerDenuncias"></activity>
         <activity android:name=".activities.VerDetalleReclamos"></activity>
+        <activity android:name=".activities.VerDetalleDenuncias"></activity>
         <activity android:name=".activities.Publicacion"></activity>
-
-
-
-
 
         <activity
             android:name=".activities.MainActivity"

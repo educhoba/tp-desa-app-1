@@ -34,7 +34,7 @@ public class PerfilUser extends AppCompatActivity {
         Button btn_generar_reclamo = findViewById(R.id.btn_generar_reclamo);
         Button btn_generar_denuncia = findViewById(R.id.btn_generar_denuncia);
         Button btn_ver_reclamos = findViewById(R.id.btn_ver_reclamos);
-
+        Button btn_ver_denuncias = findViewById(R.id.btn_ver_denuncias);
 
 
         config = findViewById(R.id.configImage);
@@ -91,6 +91,16 @@ public class PerfilUser extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(PerfilUser.this, VerReclamos.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_ver_denuncias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(PerfilUser.this, VerDenuncias.class);
+                intent.putExtra("usuario",user);
                 startActivity(intent);
             }
         });
