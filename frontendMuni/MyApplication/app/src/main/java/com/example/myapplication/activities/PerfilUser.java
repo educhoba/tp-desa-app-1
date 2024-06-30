@@ -29,9 +29,10 @@ public class PerfilUser extends AppCompatActivity {
         btn_back = findViewById(R.id.btn_back);
         home = findViewById(R.id.home);
 
-        Button btn = findViewById(R.id.Password);
+        //Button btn = findViewById(R.id.Password);
         Button btn_generar_publicacion = findViewById(R.id.btn_generar_publicacion);
-        Button btn_generar_reclamo = findViewById(R.id.Password);
+        Button btn_generar_reclamo = findViewById(R.id.btn_generar_reclamo);
+        Button btn_generar_denuncia = findViewById(R.id.btn_generar_denuncia);
         Button btn_ver_reclamos = findViewById(R.id.btn_ver_reclamos);
 
 
@@ -50,11 +51,20 @@ public class PerfilUser extends AppCompatActivity {
             }
         });
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        btn_generar_publicacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent = new Intent(PerfilUser.this, GenerarReclamo.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_generar_denuncia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(PerfilUser.this, GenerarDenuncia.class);
                 startActivity(intent);
             }
         });

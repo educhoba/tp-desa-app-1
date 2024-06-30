@@ -82,11 +82,13 @@
                 android:textStyle="bold"/>
 
             <RadioButton
+                android:id="@+id/optionsComercio"
                 android:layout_width="wrap_content"
                 android:layout_height="26dp"
                 android:text="Comercio" />
 
             <RadioButton
+                android:id="@+id/optionsVecino"
                 android:layout_width="wrap_content"
                 android:layout_height="26dp"
                 android:text="Vecino"/>
@@ -115,7 +117,7 @@
 
             <!-- Si carga comercios-->
             <LinearLayout
-                android:id="@+id/options"
+                android:id="@+id/comercio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -135,47 +137,39 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"/>
 
-
-                <EditText
-                    android:id="@+id/comentariosAuto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Descripcion"
-                    android:textSize="15dp"
-                    android:layout_marginTop="20dp"/>
-
             </LinearLayout>
 
             <!-- Si carga vecinos-->
             <LinearLayout
-                android:id="@+id/vecinos"
+                android:id="@+id/vecino"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
 
 
                 <EditText
-                    android:id="@+id/Docveci"
+                    android:id="@+id/docveci"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Documento del vecino"
                     android:textSize="15dp"
                     android:layout_marginTop="10dp"/>
 
-                <EditText
-                    android:id="@+id/Descveci"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Descripcion"
-                    android:textSize="15dp"
-                    android:layout_marginTop="10dp"/>
-
-
             </LinearLayout>
 
 
+
+            <EditText
+                android:id="@+id/descripcionDenuncia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Descripción"
+                android:textSize="15dp"
+                android:layout_marginTop="20dp"/>
+
             <Button
+                android:id="@+id/buttonImage"
                 android:layout_width="wrap_content"
                 android:layout_height="33dp"
                 android:backgroundTint="@color/blue"
@@ -190,6 +184,7 @@
         </LinearLayout>
 
         <CheckBox
+            android:id="@+id/checkAcepto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Acepto que lo indicado en el objeto de la denuncia y pruebas aportadas, en caso de falsedad puede dar lugar a una acción judicial por parte del municipio y/o los denunciados."
@@ -197,6 +192,7 @@
             android:padding="5dp"/>
 
         <Button
+            android:id="@+id/btnGenerar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"

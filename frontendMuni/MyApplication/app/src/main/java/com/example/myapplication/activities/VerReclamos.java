@@ -9,35 +9,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.content.Intent;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 
-import android.widget.LinearLayout;
-import android.widget.Spinner;
-
-import androidx.appcompat.app.AppCompatActivity;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 import retrofit2.Call;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.myapplication.ApiService;
 import com.example.myapplication.R;
 import com.example.myapplication.RetrofitClient;
-import com.example.myapplication.ServiciosAdapter;
-import com.example.myapplication.models.Reclamo;
-import com.example.myapplication.models.Servicios;
+import com.example.myapplication.models.Reclamos;
 
 public class VerReclamos extends AppCompatActivity {
 
@@ -55,15 +37,15 @@ public class VerReclamos extends AppCompatActivity {
         new listarReclamosTask().execute();
     }
 
-    private class listarReclamosTask extends AsyncTask<Void, Void, List<Reclamo>> {
+    private class listarReclamosTask extends AsyncTask<Void, Void, List<Reclamos>> {
 
         @Override
-        protected List<Reclamo> doInBackground(Void... voids) {
+        protected List<Reclamos> doInBackground(Void... voids) {
             ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
-            Call<List<Reclamo>> call = apiService.getReclamos();
+            Call<List<Reclamos>> call = apiService.getReclamos();
 
             try {
-                Response<List<Reclamo>> response = call.execute();
+                Response<List<Reclamos>> response = call.execute();
                 if (response.isSuccessful()) {
                     return response.body();
                 } else {
@@ -76,7 +58,7 @@ public class VerReclamos extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(List<Reclamo> reclamos) {
+        protected void onPostExecute(List<Reclamos> reclamos) {
             if (reclamos != null) {
                 adapter = new ReclamosAdapter(reclamos);
                 recyclerView.setAdapter(adapter);

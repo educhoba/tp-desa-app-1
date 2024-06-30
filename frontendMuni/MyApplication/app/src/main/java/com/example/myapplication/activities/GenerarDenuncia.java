@@ -11,10 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.ApiService;
 import com.example.myapplication.R;
 import com.example.myapplication.RetrofitClient;
+import com.example.myapplication.models.Denuncias;
 import com.example.myapplication.models.Desperfectos;
 import com.example.myapplication.models.Imagenes;
 import com.example.myapplication.models.Reclamos;
@@ -42,52 +44,49 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class GenerarReclamo extends AppCompatActivity {
+public class GenerarDenuncia extends AppCompatActivity {
 
-    private Spinner spinner1;
-    private Spinner spinner2;
-    private Spinner spinner3;
-    //private EditText comentariosManual;
-    private EditText comentariosAuto;
-    //private EditText rubroManual;
-    //private EditText desperfectoManual;
-    private EditText sitioDireccionManual;
+    private Spinner spinnerSitioComercioDenunciado;
+
+    private EditText descripcionDenunciaText;
+    private EditText documentoVecinoDenunciadoText;
+    private EditText nombreComercioDenunciadoText;
+    private CheckBox checkAcepto;
+
     private RadioGroup radioGroup;
-    private LinearLayout sectionAuto;
-    private LinearLayout sectionManual;
+    private LinearLayout sectionVecino;
+    private LinearLayout sectionComercio;
     private List<Imagenes> listaImagenesBase64 = new ArrayList<>();
     private static final int REQUEST_CODE_SELECT_IMAGES = 7;
 
     private Integer SitioSeleccionado = 0;
-    private Integer DesperfectoSeleccionado = 0;
-    private Integer SitioManualIdHardcodeado = 1;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.reclamos);
+        setContentView(R.layout.generar_denuncia);
 
         radioGroup = findViewById(R.id.radioGroup);
-        sectionAuto = findViewById(R.id.options);
-        sectionManual = findViewById(R.id.manual);
+        sectionVecino = findViewById(R.id.vecino);
+        sectionComercio = findViewById(R.id.comercio);
 
-        spinner1 = findViewById(R.id.spinner1);
-        spinner2 = findViewById(R.id.spinner2);
-        //spinner3 = findViewById(R.id.spinner3);
+        spinnerSitioComercioDenunciado = findViewById(R.id.spinner1);
 
-        comentariosAuto = findViewById(R.id.comentariosAuto);
-        //comentariosManual = findViewById(R.id.comentariosManual);
-        sitioDireccionManual = findViewById(R.id.sitioDireccionManual);
+        checkAcepto = findViewById(R.id.checkAcepto);
+
+        descripcionDenunciaText = findViewById(R.id.descripcionDenuncia);
+        nombreComercioDenunciadoText = findViewById(R.id.nombrecom);
+        documentoVecinoDenunciadoText = findViewById(R.id.docveci);
 
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.optionsRadio) {
-                    sectionAuto.setVisibility(View.VISIBLE);
-                    sectionManual.setVisibility(View.GONE);
+                    sectionVecino.setVisibility(View.VISIBLE);
+                    sectionComercio.setVisibility(View.GONE);
                 } else if (checkedId == R.id.manualRadio) {
-                    sectionAuto.setVisibility(View.GONE);
-                    sectionManual.setVisibility(View.VISIBLE);
+                    sectionVecino.setVisibility(View.GONE);
+                    sectionComercio.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -96,7 +95,7 @@ public class GenerarReclamo extends AppCompatActivity {
         generarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                generarReclamo();
+                generarDenuncia();
             }
         });
         Button buttonImage = findViewById(R.id.buttonImage);
@@ -108,12 +107,11 @@ public class GenerarReclamo extends AppCompatActivity {
         });
 
         new ObtenerSitiosUnicosTask().execute();
-        new ObtenerDesperfectosUnicosTask().execute();
     }
 
-    private void generarReclamo() {
+    private void generarDenuncia() {
             // Obtener los datos del formulario según el modo seleccionado
-            String modoCarga = obtenerModoCarga();
+            String tipoDenuncia = obtenerTipoDenuncia();
             Integer desperfectoId = -1;
             Integer sitioId = -1;
             String sitioDireccion = "";
@@ -121,29 +119,26 @@ public class GenerarReclamo extends AppCompatActivity {
 
             // Crear objeto Reclamo
             Reclamos reclamo = new Reclamos();
-            if (modoCarga.equals("opciones")) {
-                if(SitioSeleccionado < 1){
-                    Toast.makeText(GenerarReclamo.this, "Seleccione un sitio.", Toast.LENGTH_SHORT).show();
+            if (tipoDenuncia.equals("vecino")) {
+                if(false){
+                    Toast.makeText(GenerarDenuncia.this, "Seleccione un sitio.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                reclamo.setIdSitio(SitioSeleccionado);
 
-            } else if (modoCarga.equals("manual")) {
-                sitioDireccion = sitioDireccionManual.getText().toString();
-                SitiosManuales sm = new SitiosManuales();
-                sm.setDescripcion(sitioDireccion);
-                List<SitiosManuales> sml = new ArrayList<>();
-                reclamo.setIdSitio(1);//To Do: Deshardcodear
-                sml.add(sm);
-                reclamo.setSitiosManuales(sml);
+
+            } else if (tipoDenuncia.equals("comercio")) {
+                if(false){
+                    Toast.makeText(GenerarDenuncia.this, "Seleccione un sitio.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
             }
             else{
-                Toast.makeText(GenerarReclamo.this, "Seleccione un modo", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GenerarDenuncia.this, "Seleccione un tipo", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             if(DesperfectoSeleccionado < 1){
-                Toast.makeText(GenerarReclamo.this, "Seleccione un desperfecto.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GenerarDenuncia.this, "Seleccione un desperfecto.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -159,11 +154,11 @@ public class GenerarReclamo extends AppCompatActivity {
     }
 
     // Método para obtener el modo de carga seleccionado
-    private String obtenerModoCarga() {
-        if (radioGroup.getCheckedRadioButtonId() == R.id.optionsRadio) {
-            return "opciones";
-        } else if (radioGroup.getCheckedRadioButtonId() == R.id.manualRadio){
-            return "manual";
+    private String obtenerTipoDenuncia() {
+        if (radioGroup.getCheckedRadioButtonId() == R.id.optionsComercio) {
+            return "comercio";
+        } else if (radioGroup.getCheckedRadioButtonId() == R.id.optionsVecino){
+            return "vecino";
         }
         else{
             return "";
@@ -201,7 +196,7 @@ public class GenerarReclamo extends AppCompatActivity {
                 sitios.removeIf(e -> e.getIdSitio().equals(SitioManualIdHardcodeado));
                 configurarSpinnerSitios(sitios);
             } else {
-                Toast.makeText(GenerarReclamo.this, "Error al obtener los datos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GenerarDenuncia.this, "Error al obtener los datos", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -243,10 +238,10 @@ public class GenerarReclamo extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // Asignar el adaptador al Spinner
-        spinner1.setAdapter(adapter);
+        spinnerSitioComercioDenunciado.setAdapter(adapter);
 
         // Manejar la selección del Spinner
-        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerSitioComercioDenunciado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position > 0) {
@@ -296,7 +291,7 @@ public class GenerarReclamo extends AppCompatActivity {
             if (desperfectos != null) {
                 configurarSpinnerDesperfectos(desperfectos);
             } else {
-                Toast.makeText(GenerarReclamo.this, "Error al obtener los datos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GenerarDenuncia.this, "Error al obtener los datos", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -426,17 +421,17 @@ public class GenerarReclamo extends AppCompatActivity {
         return Bitmap.createScaledBitmap(bitmap, width, height, true);
     }
 
-    private class RegistrarReclamoTask extends AsyncTask<Reclamos, Void, Void> {
+    private class RegistrarDenunciaTask extends AsyncTask<Denuncias, Void, Void> {
 
         @Override
-        protected Void doInBackground(Reclamos... reclamos) {
-            Reclamos reclamo = reclamos[0];
+        protected Void doInBackground(Denuncias... denuncias) {
+            Denuncias denuncia = denuncias[0];
 
             // Realizar la llamada Retrofit para registrar el servicio
             Retrofit retrofit = RetrofitClient.getClient();
             ApiService apiService = retrofit.create(ApiService.class);
 
-            Call<Void> call = apiService.registrarReclamo(reclamo);
+            Call<Void> call = apiService.registrarDenuncia(denuncia);
             call.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
@@ -444,7 +439,8 @@ public class GenerarReclamo extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(GenerarReclamo.this, "Servicio registrado correctamente", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(GenerarDenuncia.this, "" +
+                                        "Denuncia registrada correctamente", Toast.LENGTH_SHORT).show();
                                 limpiarFormulario();
                             }
                         });
@@ -452,7 +448,7 @@ public class GenerarReclamo extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(GenerarReclamo.this, "Error al registrar el servicio", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(GenerarDenuncia.this, "Error al registrar el servicio", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -463,7 +459,7 @@ public class GenerarReclamo extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(GenerarReclamo.this, "Error en la solicitud: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(GenerarDenuncia.this, "Error en la solicitud: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -473,10 +469,10 @@ public class GenerarReclamo extends AppCompatActivity {
         }
     }
     private void limpiarFormulario() {
-        comentariosAuto.setText("");
-        spinner1.setSelection(0);
-        spinner2.setSelection(0);
-        sitioDireccionManual.setText("");
+        documentoVecinoDenunciadoText.setText("");
+        descripcionDenunciaText.setText("");
+        nombreComercioDenunciadoText.setText("");
+        spinnerSitioComercioDenunciado.setSelection(0);
         radioGroup.clearCheck();
         listaImagenesBase64.clear();
     }

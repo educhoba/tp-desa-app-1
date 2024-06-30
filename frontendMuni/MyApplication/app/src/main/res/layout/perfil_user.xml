@@ -61,7 +61,7 @@
         >
 
         <Button
-            android:id="@+id/Password"
+            android:id="@+id/btn_generar_reclamo"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="Generar reclamo"

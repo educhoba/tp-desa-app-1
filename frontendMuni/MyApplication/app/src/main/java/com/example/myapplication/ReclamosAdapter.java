@@ -1,6 +1,6 @@
 package com.example.myapplication;
 import com.example.myapplication.activities.MainActivity;
-import com.example.myapplication.models.Reclamo;
+import com.example.myapplication.models.Reclamos;
 
 
 import android.content.Intent;
@@ -19,11 +19,11 @@ import java.util.List;
 
 public class ReclamosAdapter extends RecyclerView.Adapter<ReclamosAdapter.ViewHolder> {
 
-    private List<Reclamo> reclamosList;
+    private List<Reclamos> reclamosList;
     private Context context;
 
 
-    public ReclamosAdapter(List<Reclamo> reclamosList) {
+    public ReclamosAdapter(List<Reclamos> reclamosList) {
         this.reclamosList = reclamosList;
         this.context = context;
 
@@ -38,7 +38,7 @@ public class ReclamosAdapter extends RecyclerView.Adapter<ReclamosAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Reclamo reclamo = reclamosList.get(position);
+        Reclamos reclamo = reclamosList.get(position);
         holder.textViewId.setText("ID: " + reclamo.getIdReclamo());
         holder.textViewSitio.setText("Sitio: " + reclamo.getIdSitio());
         holder.textViewDesperfecto.setText("Desperfecto: " + reclamo.getIdDesperfecto());

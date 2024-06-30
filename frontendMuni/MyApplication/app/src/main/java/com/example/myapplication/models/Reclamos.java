@@ -3,9 +3,10 @@ package com.example.myapplication.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Reclamo {
+public class Reclamos {
     @SerializedName("idReclamo")
     private Integer idReclamo;
     @SerializedName("documento")
@@ -26,10 +27,11 @@ public class Reclamo {
     private List<Imagenes> imagenes; // Asegúrate de tener la clase Imagen definida correctamente si es un tipo complejo
     @SerializedName("movimientos")
     private List<MovimientoReclamo> movimientos; // Asegúrate de tener la clase Movimiento definida correctamente si es un tipo complejo
-    @SerializedName("sitioManual")
-    private SitiosManuales sitioManual; // Asegúrate de tener la clase Movimiento definida correctamente si es un tipo complejo
+    @SerializedName("sitiosManuales")
+    private List<SitiosManuales> sitiosManuales;
 
-    public Reclamo() {
+    public Reclamos() {
+        sitiosManuales = new ArrayList<>();
         // Constructor vacío requerido por Retrofit
     }
 
@@ -113,12 +115,12 @@ public class Reclamo {
         this.movimientos = movimientos;
     }
 
-    public SitiosManuales getSitioManual() {
-        return sitioManual;
+    public List<SitiosManuales> getSitiosManuales() {
+        return sitiosManuales;
     }
 
-    public void setSitioManual(SitiosManuales sitioManual) {
-        this.sitioManual = sitioManual;
+    public void setSitiosManuales(List<SitiosManuales> sitiosManuales) {
+        this.sitiosManuales = sitiosManuales;
     }
 
 }

@@ -1,12 +1,12 @@
 package com.example.myapplication;
+import com.example.myapplication.models.Denuncias;
 import com.example.myapplication.models.Desperfectos;
 import com.example.myapplication.models.Inspector;
-import com.example.myapplication.models.Reclamo;
+import com.example.myapplication.models.Reclamos;
 import com.example.myapplication.models.Servicios;
 import com.example.myapplication.models.Sitios;
 import com.example.myapplication.models.Usuarios;
 import com.example.myapplication.models.Vecinos;
-import com.example.myapplication.models.Reclamo;
 
 import java.util.List;
 
@@ -50,13 +50,16 @@ public interface ApiService {
     Call<Void> registrarServicio(@Body Servicios servicio);
 
     @GET("/reclamos")
-    Call<List<Reclamo>> getReclamos();
+    Call<List<Reclamos>> getReclamos();
 
     @GET("/reclamos/{id}")
-    Call<Reclamo> getReclamoById(@Path("id") int id);
+    Call<Reclamos> getReclamoById(@Path("id") int id);
 
     @POST("/reclamos/registrar")
-    Call<Void> registrarReclamo(@Body Reclamo reclamo);
+    Call<Void> registrarReclamo(@Body Reclamos reclamo);
+
+    @POST("/denuncia/registrar")
+    Call<Void> registrarDenuncia(@Body Denuncias denuncia);
 
     @GET("/sitios")
     Call<List<Sitios>> listarSitios();
