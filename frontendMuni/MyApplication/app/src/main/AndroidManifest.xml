@@ -26,7 +26,7 @@
         <activity android:name=".activities.GenerarReclamo"></activity>
         <activity android:name=".activities.GenerarDenuncia"></activity>
         <activity android:name=".activities.VerReclamos"></activity>
-        <activity android:name=".activities.VerDetalleReclamo"></activity>
+        <activity android:name=".activities.VerDetalleReclamos"></activity>
         <activity android:name=".activities.Publicacion"></activity>
 
 

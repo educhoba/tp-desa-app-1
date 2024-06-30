@@ -1,6 +1,8 @@
 package com.example.myapplication;
 import com.example.myapplication.activities.MainActivity;
+import com.example.myapplication.activities.VerDetalleReclamos;
 import com.example.myapplication.models.Reclamos;
+import com.google.android.material.tabs.TabLayout;
 
 
 import android.content.Intent;
@@ -12,10 +14,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
-
-
+import androidx.viewpager.widget.ViewPager;
 
 import java.util.List;
+
 
 public class ReclamosAdapter extends RecyclerView.Adapter<ReclamosAdapter.ViewHolder> {
 
@@ -44,10 +46,15 @@ public class ReclamosAdapter extends RecyclerView.Adapter<ReclamosAdapter.ViewHo
         holder.textViewDesperfecto.setText("Desperfecto: " + reclamo.getIdDesperfecto());
         holder.textViewDescripcion.setText("Descripción: " + reclamo.getDescripcion());
         int id = reclamo.getIdReclamo();
+/*
+        ImagePagerAdapter adapter = new ImagePagerAdapter(reclamo.getImagenes());
+        holder.viewPager.setAdapter(adapter);
+        holder.tabLayout.setupWithViewPager(holder.viewPager, true);
+*/
         // Configurar el botón "Ver detalle" si es necesario
         holder.buttonVerDetalle.setOnClickListener(v -> {
-            Intent intent = new Intent(holder.itemView.getContext(), MainActivity.class);
-            intent.putExtra("idReclamo", id);
+            Intent intent = new Intent(holder.itemView.getContext(), VerDetalleReclamos.class);
+            intent.putExtra("RECLAMO_ID", id);
             holder.itemView.getContext().startActivity(intent);
         });
     }
@@ -63,6 +70,9 @@ public class ReclamosAdapter extends RecyclerView.Adapter<ReclamosAdapter.ViewHo
         public TextView textViewDesperfecto;
         public TextView textViewDescripcion;
         public Button buttonVerDetalle;
+        ViewPager viewPager;
+        TabLayout tabLayout;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -71,6 +81,9 @@ public class ReclamosAdapter extends RecyclerView.Adapter<ReclamosAdapter.ViewHo
             textViewDesperfecto = itemView.findViewById(R.id.textViewDesperfecto);
             textViewDescripcion = itemView.findViewById(R.id.textViewDescripcion);
             buttonVerDetalle = itemView.findViewById(R.id.buttonVerDetalle);
+            /*
+            viewPager = itemView.findViewById(R.id.viewPager);
+            tabLayout = itemView.findViewById(R.id.tabLayout);*/
         }
     }
 }
