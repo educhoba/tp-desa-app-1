@@ -121,6 +121,7 @@ public class GenerarReclamo extends AppCompatActivity {
 
             // Crear objeto Reclamo
             Reclamos reclamo = new Reclamos();
+            reclamo.setDocumento("DNI28000046"); //TODO PONER EL DEL USUARIO
             if (modoCarga.equals("opciones")) {
                 if(SitioSeleccionado < 1){
                     Toast.makeText(GenerarReclamo.this, "Seleccione un sitio.", Toast.LENGTH_SHORT).show();
@@ -133,7 +134,7 @@ public class GenerarReclamo extends AppCompatActivity {
                 SitiosManuales sm = new SitiosManuales();
                 sm.setDescripcion(sitioDireccion);
                 List<SitiosManuales> sml = new ArrayList<>();
-                reclamo.setIdSitio(1);//To Do: Deshardcodear
+                reclamo.setIdSitio(1);//TODO: Deshardcodear
                 sml.add(sm);
                 reclamo.setSitiosManuales(sml);
             }

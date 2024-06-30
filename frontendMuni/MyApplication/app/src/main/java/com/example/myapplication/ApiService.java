@@ -58,7 +58,7 @@ public interface ApiService {
     @POST("/reclamos/registrar")
     Call<Void> registrarReclamo(@Body Reclamos reclamo);
 
-    @POST("/denuncia/registrar")
+    @POST("/denuncias/registrar")
     Call<Void> registrarDenuncia(@Body Denuncias denuncia);
 
     @GET("/sitios")

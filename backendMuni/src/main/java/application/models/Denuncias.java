@@ -22,14 +22,14 @@ public class Denuncias {
     private String estado;
     @Column(name = "aceptaResponsabilidad", nullable = false)
     private Integer aceptaResponsabilidad;
+    @Column(name = "denunciado", length = 20, nullable = true)
+    private String denunciado;
     @OneToMany
     @JoinColumn(name = "idDenuncia", referencedColumnName = "idDenuncias", insertable = false, updatable = false)
     private List<Imagenes> imagenes;
     @OneToMany
     @JoinColumn(name = "idDenuncia", referencedColumnName = "idDenuncias", insertable = false, updatable = false)
     private List<movimientosDenuncia> movimientos;
-    @Column(name = "denunciado", length = 20, nullable = true)
-    private String denunciado;
     public Denuncias(){
 
     }

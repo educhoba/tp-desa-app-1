@@ -20,7 +20,6 @@ public class Denuncias {
     private Integer aceptaResponsabilidad;
     @SerializedName("denunciado")
     private String denunciado;
-
     @SerializedName("imagenes")
     private List<Imagenes> imagenes; // Asegúrate de tener la clase Imagen definida correctamente si es un tipo complejo
     @SerializedName("movimientos")

@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -50,7 +51,7 @@ public class GenerarDenuncia extends AppCompatActivity {
 
     private EditText descripcionDenunciaText;
     private EditText documentoVecinoDenunciadoText;
-    private EditText nombreComercioDenunciadoText;
+    //private EditText nombreComercioDenunciadoText;
     private Integer SitioManualIdHardcodeado = 1;
     private CheckBox checkAcepto;
 
@@ -58,7 +59,7 @@ public class GenerarDenuncia extends AppCompatActivity {
     private LinearLayout sectionVecino;
     private LinearLayout sectionComercio;
     private List<Imagenes> listaImagenesBase64 = new ArrayList<>();
-    private static final int REQUEST_CODE_SELECT_IMAGES = 7;
+    private static final int REQUEST_CODE_SELECT_IMAGES = 19;//dice que no hay limite pero 20 es un monton
 
     private Integer SitioSeleccionado = 0;
 
@@ -75,7 +76,7 @@ public class GenerarDenuncia extends AppCompatActivity {
         checkAcepto = findViewById(R.id.checkAcepto);
 
         descripcionDenunciaText = findViewById(R.id.descripcionDenuncia);
-        nombreComercioDenunciadoText = findViewById(R.id.nombrecom);
+        //nombreComercioDenunciadoText = findViewById(R.id.nombrecom);
         documentoVecinoDenunciadoText = findViewById(R.id.docveci);
 
 
@@ -106,54 +107,70 @@ public class GenerarDenuncia extends AppCompatActivity {
                 seleccionarImagenes();
             }
         });
+        checkAcepto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                checkAcepto.setSelected(isChecked);
+            }
+        });
 
         new ObtenerSitiosUnicosTask().execute();
     }
 
     private void generarDenuncia() {
+        if(!checkAcepto.isSelected()){
+            //chequear algo
+            Toast.makeText(GenerarDenuncia.this, "Debe aceptar los TyC", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
             // Obtener los datos del formulario según el modo seleccionado
             String tipoDenuncia = obtenerTipoDenuncia();
-            Integer desperfectoId = -1;
-            Integer sitioId = -1;
-            String sitioDireccion = "";
-            String comentarios = "";
 
             // Crear objeto Denuncias
             Denuncias denuncia = new Denuncias();
+            denuncia.setAceptaResponsabilidad(1);//(true)
+            denuncia.setDocumento("DNI28000046"); //TODO PONER EL DEL USUARIO
+
             if (tipoDenuncia.equals("vecino")) {
-                if(SitioManualIdHardcodeado < 1){
+                if(documentoVecinoDenunciadoText.getText().toString().isEmpty()){
+                    //chequear algo
+                    Toast.makeText(GenerarDenuncia.this, "Falta el documento.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                denuncia.setDenunciado(documentoVecinoDenunciadoText.getText().toString());
+            } else if (tipoDenuncia.equals("comercio")) {
+
+                if(SitioSeleccionado < 1){
                     //chequear algo
                     Toast.makeText(GenerarDenuncia.this, "Seleccione un sitio.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-            } else if (tipoDenuncia.equals("comercio")) {
-                if(false){
-                    Toast.makeText(GenerarDenuncia.this, "Seleccione un sitio.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                denuncia.setIdSitio(SitioSeleccionado);
             }
             else{
                 Toast.makeText(GenerarDenuncia.this, "Seleccione un tipo", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-
-
+            denuncia.setDescripcion(descripcionDenunciaText.getText().toString());
             denuncia.setImagenes(listaImagenesBase64);
+
 
             new RegistrarDenunciaTask().execute(denuncia);
     }
 
-    // Método para obtener el modo de carga seleccionado
+
     private String obtenerTipoDenuncia() {
         if (radioGroup.getCheckedRadioButtonId() == R.id.optionsComercio) {
+            //toast("comercio");
             return "comercio";
         } else if (radioGroup.getCheckedRadioButtonId() == R.id.optionsVecino){
+            //toast("vecino");
             return "vecino";
         }
-        else{
+        else{//toast("nada");
             return "";
         }
     }
@@ -347,7 +364,14 @@ public class GenerarDenuncia extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(GenerarDenuncia.this, "Error al registrar el servicio", Toast.LENGTH_SHORT).show();
+
+                                String tipoDenuncia = obtenerTipoDenuncia();
+                                if (tipoDenuncia.equals("vecino")) {
+                                    Toast.makeText(GenerarDenuncia.this, "Error al registrar denuncia. Verifique que el documento sea de un vecino.", Toast.LENGTH_SHORT).show();
+
+                                } else if (tipoDenuncia.equals("comercio")) {
+                                    Toast.makeText(GenerarDenuncia.this, "Error al registrar denuncia", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         });
                     }
@@ -370,10 +394,13 @@ public class GenerarDenuncia extends AppCompatActivity {
     private void limpiarFormulario() {
         documentoVecinoDenunciadoText.setText("");
         descripcionDenunciaText.setText("");
-        nombreComercioDenunciadoText.setText("");
+        //nombreComercioDenunciadoText.setText("");
         spinnerSitioComercioDenunciado.setSelection(0);
         radioGroup.clearCheck();
         listaImagenesBase64.clear();
     }
+    private void toast(String text){
+        Toast.makeText(GenerarDenuncia.this, text, Toast.LENGTH_SHORT).show();
 
+    }
 }

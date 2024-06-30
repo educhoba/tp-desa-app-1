@@ -44,12 +44,13 @@ public class DenunciasService implements IService<Denuncias, Denuncias> {
         return ret.orElse(null);
     }
 
-    public void registrar(Denuncias denuncias) throws DenunciaException {
+    public Denuncias registrar(Denuncias denuncias) throws DenunciaException {
 
         if(false) //wip
             throw new DenunciaException("Error al registrar.");
 
         guardar(denuncias);
+        return denuncias;
     }
 
     public void actualizar(Denuncias denuncias) throws DenunciaException  {
