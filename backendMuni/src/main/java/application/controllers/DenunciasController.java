@@ -44,6 +44,7 @@ public class DenunciasController {
     @PostMapping("/registrar")
     public ResponseEntity<String> registrar(@RequestBody Denuncias denuncias){
         try{
+            denuncias.setEstado("nuevo");
             service.registrar(denuncias);
 
             //getimagenes, contar cantidad, error

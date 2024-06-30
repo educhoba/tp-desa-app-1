@@ -15,6 +15,7 @@ public class Reclamos {
     private String documento;
     @Column(name = "legajo", nullable = true)
     private Integer legajo;
+
     @Column(name = "idSitio", nullable = false)
     private Integer idSitio;
     @Column(name = "idDesperfecto", nullable = true)
@@ -32,10 +33,14 @@ public class Reclamos {
     @JoinColumn(name = "idReclamo", referencedColumnName = "idReclamo", insertable = false, updatable = false)
     private List<movimientosReclamo> movimientos;
 
-    @OneToOne
+    @OneToMany
     @JoinColumn(name = "idReclamo", referencedColumnName = "idReclamo", insertable = false, updatable = false)
-    private SitiosManuales sitioManual;
+    private List<SitiosManuales> sitiosManuales;
 
+    //ejemplo si trae 1 objeto sitio
+    //@OneToOne(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "idSitio", referencedColumnName = "idSitio")
+    //private Sitios sitio;
 
     public Reclamos(){
 
@@ -126,13 +131,22 @@ public class Reclamos {
         this.movimientos = movimientos;
     }
 
-    public SitiosManuales getSitioManual() {
-        return sitioManual;
+    public List<SitiosManuales> getSitiosManuales() {
+        return sitiosManuales;
     }
 
-    public void setSitioManual(SitiosManuales sitioManual) {
-        this.sitioManual = sitioManual;
+    public void setSitiosManuales(List<SitiosManuales> sitiosManuales) {
+        this.sitiosManuales = sitiosManuales;
     }
+
+    //public Sitios getSitio() {
+     //   return sitio;
+    //}
+
+    //public void setSitio(Sitios sitio) {
+    //    this.sitio = sitio;
+    //}
+
     //</editor-fold>
 
     //<editor-fold desc="Setters">

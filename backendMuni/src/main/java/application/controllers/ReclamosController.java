@@ -3,12 +3,15 @@ package application.controllers;
 
 import application.exceptions.ImagenException;
 import application.exceptions.ReclamoException;
+import application.exceptions.SitioManualException;
 import application.exceptions.UsuarioException;
 import application.models.Imagenes;
 import application.models.Reclamos;
+import application.models.SitiosManuales;
 import application.models.Usuarios;
 import application.services.ImagenesService;
 import application.services.ReclamosService;
+import application.services.SitiosManualesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +29,8 @@ public class ReclamosController {
     @Autowired
     private ImagenesService imagenesService; //deberia estar en el controlador
 
+    @Autowired
+    private SitiosManualesService smService; //deberia estar en el controlador
     private ReclamosController() { }
 
     @GetMapping
@@ -57,6 +62,7 @@ public class ReclamosController {
     @PostMapping("/registrar")
     public ResponseEntity<String> registrar(@RequestBody Reclamos reclamos){
         try{
+            reclamos.setEstado("nuevo");
             service.registrar(reclamos);
             //getimagenes, contar cantidad, error
             Integer id = reclamos.getIdReclamo();
@@ -64,8 +70,12 @@ public class ReclamosController {
                 img.setIdReclamo(id);
                 imagenesService.guardarImagen(img);
             }
+            for (SitiosManuales sm : reclamos.getSitiosManuales()) {
+                sm.setIdReclamo(id);
+                smService.registrarSitio(sm);
+            }
         }
-        catch (ReclamoException | ImagenException ex){
+        catch (ReclamoException | ImagenException| SitioManualException ex){
             return ResponseEntity.badRequest()
                     .body(ex.getMessage());
         }

@@ -12,6 +12,8 @@ public class SitiosManuales {
     private Integer idSitioManual;
     @Column(name = "descripcion")
     private String descripcion;
+    @Column(name = "idReclamo")
+    private Integer idReclamo;
 
     public SitiosManuales(){
 
@@ -32,6 +34,14 @@ public class SitiosManuales {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Integer getIdReclamo() {
+        return idReclamo;
+    }
+
+    public void setIdReclamo(Integer idReclamo) {
+        this.idReclamo = idReclamo;
     }
     //</editor-fold>
 

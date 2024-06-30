@@ -45,7 +45,6 @@ public class ReclamosService implements IService<Reclamos, Reclamos> {
         return ret.orElse(null);
     }
     public Reclamos registrar(Reclamos reclamos) throws ReclamoException {
-        //wip
         if(false)
             throw new ReclamoException("Error al registrar.");
 
