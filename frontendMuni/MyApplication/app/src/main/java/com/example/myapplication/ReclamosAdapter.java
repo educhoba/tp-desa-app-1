@@ -1,4 +1,5 @@
 package com.example.myapplication;
+import com.example.myapplication.activities.MainActivity;
 import com.example.myapplication.models.Reclamo;
 
 
@@ -42,10 +43,12 @@ public class ReclamosAdapter extends RecyclerView.Adapter<ReclamosAdapter.ViewHo
         holder.textViewSitio.setText("Sitio: " + reclamo.getIdSitio());
         holder.textViewDesperfecto.setText("Desperfecto: " + reclamo.getIdDesperfecto());
         holder.textViewDescripcion.setText("Descripción: " + reclamo.getDescripcion());
-
+        int id = reclamo.getIdReclamo();
         // Configurar el botón "Ver detalle" si es necesario
         holder.buttonVerDetalle.setOnClickListener(v -> {
-            //logica para boton
+            Intent intent = new Intent(holder.itemView.getContext(), MainActivity.class);
+            intent.putExtra("idReclamo", id);
+            holder.itemView.getContext().startActivity(intent);
         });
     }
 
