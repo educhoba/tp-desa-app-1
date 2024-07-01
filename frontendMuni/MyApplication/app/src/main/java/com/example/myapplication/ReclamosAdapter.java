@@ -42,8 +42,6 @@ public class ReclamosAdapter extends RecyclerView.Adapter<ReclamosAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Reclamos reclamo = reclamosList.get(position);
         holder.textViewId.setText("Nro de reclamo: " + reclamo.getIdReclamo());
-        holder.textViewSitio.setText("Sitio: " + reclamo.getIdSitio());
-        holder.textViewDesperfecto.setText("Desperfecto: " + reclamo.getIdDesperfecto());
         holder.textViewDescripcion.setText("Descripción: " + reclamo.getDescripcion());
         int id = reclamo.getIdReclamo();
 

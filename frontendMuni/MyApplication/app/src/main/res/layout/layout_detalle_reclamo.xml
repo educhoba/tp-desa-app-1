@@ -25,21 +25,6 @@
         android:text="idReclamo"
         android:paddingBottom="4dp"/>
 
-    <TextView
-        android:id="@+id/textViewSitio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="sitio"
-        android:paddingBottom="4dp"/>
-
-    <TextView
-        android:id="@+id/textViewDesperfecto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="desperfecto"
-        android:paddingBottom="4dp"/>
 
     <TextView
         android:id="@+id/textViewDescripcion"
@@ -47,6 +32,21 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:text="Descripción:"
+        android:paddingBottom="4dp"/>
+    <TextView
+        android:id="@+id/textViewSitio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text=""
+        android:paddingBottom="4dp"/>
+
+    <TextView
+        android:id="@+id/textViewDesperfecto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text=""
         android:paddingBottom="4dp"/>
     <Button
         android:id="@+id/buttonVerDetalle"
