@@ -41,5 +41,7 @@ public class DesperfectosService implements IService<Desperfectos, Desperfectos>
         Optional<Desperfectos> ret = iRepository.findByIdDesperfecto(id);
         return ret.orElse(null);
     }
-
+    public List<Desperfectos> filtrarPorRubro(Integer idRubro) {
+        return iRepository.findByIdRubro(idRubro);
+    }
 }

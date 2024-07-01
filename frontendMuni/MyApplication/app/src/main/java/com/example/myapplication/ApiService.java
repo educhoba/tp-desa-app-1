@@ -55,12 +55,18 @@ public interface ApiService {
     @GET("/reclamos/{id}")
     Call<Reclamos> getReclamoById(@Path("id") int id);
 
+    @GET("/reclamos/documento={documento}")
+    Call<List<Reclamos>> listarReclamosPorDocumento(@Path("documento") String documento);
+    @GET("/reclamos/legajo={legajo}")
+    Call<List<Reclamos>> listarReclamosPorLegajo(@Path("legajo") int legajo);
     @POST("/reclamos/registrar")
     Call<Void> registrarReclamo(@Body Reclamos reclamo);
 
     @GET("/denuncias")
     Call<List<Denuncias>> getDenuncias();
 
+    @GET("/denuncias/listarPorDocumento/{documento}")
+    Call<List<Denuncias>> listarDenunciasPorDocumento(@Path("documento") String documento);
     @GET("/denuncias/{id}")
     Call<Denuncias> getDenunciaById(@Path("id") int id);
     @POST("/denuncias/registrar")

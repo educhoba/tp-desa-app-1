@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Button;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.ApiService;
 import com.example.myapplication.R;
@@ -69,13 +71,13 @@ public class GenerarReclamo extends AppCompatActivity {
     private Integer SitioSeleccionado = 0;
     private Integer DesperfectoSeleccionado = 0;
     private Integer SitioManualIdHardcodeado = 1;
-
     private ConnectivityManager cm;
 
     String cargo;
     Usuarios usuario;
     Inspector inspector;
 
+    TextView textNombreUsuario;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,10 +94,15 @@ public class GenerarReclamo extends AppCompatActivity {
         comentariosAuto = findViewById(R.id.comentariosAuto);
         //comentariosManual = findViewById(R.id.comentariosManual);
         sitioDireccionManual = findViewById(R.id.sitioDireccionManual);
+        textNombreUsuario = findViewById(R.id.nombre_usuario);
 
         cargo = getIntent().getStringExtra("cargo");
+        if (cargo.equals("Usuario")){
 
-
+        }else{
+            inspector =  (Inspector) getIntent().getSerializableExtra("usuario");
+            textNombreUsuario.setText("Inspector");
+        }
 
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

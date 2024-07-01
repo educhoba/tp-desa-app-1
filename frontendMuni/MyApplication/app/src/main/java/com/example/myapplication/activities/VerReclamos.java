@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.AsyncTask;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,6 +26,8 @@ import com.example.myapplication.models.Inspector;
 import com.example.myapplication.models.Reclamos;
 import com.example.myapplication.models.Usuarios;
 
+import org.w3c.dom.Text;
+
 public class VerReclamos extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -30,6 +35,9 @@ public class VerReclamos extends AppCompatActivity {
     String cargo;
     Usuarios usuario;
     Inspector inspector;
+    TextView textNombreUsuario;
+
+    CheckBox checkFiltrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +47,23 @@ public class VerReclamos extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewReclamos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         cargo = getIntent().getStringExtra("cargo");
+        checkFiltrar = findViewById(R.id.checkFiltrar);
+        textNombreUsuario = findViewById(R.id.nombre_usuario);
 
         if (cargo.equals("Usuario")){
             usuario =  (Usuarios) getIntent().getSerializableExtra("usuario");
+            checkFiltrar.setVisibility(RecyclerView.VISIBLE);
+            checkFiltrar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    checkFiltrar.setSelected(isChecked);
+                    new listarReclamosTask().execute();
+                }
+            });
+
         }else{
             inspector =  (Inspector) getIntent().getSerializableExtra("usuario");
+            textNombreUsuario.setText("Inspector");
         }
 
         new listarReclamosTask().execute();
@@ -54,7 +74,18 @@ public class VerReclamos extends AppCompatActivity {
         @Override
         protected List<Reclamos> doInBackground(Void... voids) {
             ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
-            Call<List<Reclamos>> call = apiService.getReclamos();
+            Call<List<Reclamos>> call = null;
+
+            if (cargo.equals("Usuario")){
+                if(checkFiltrar.isChecked()){
+                    call= apiService.getReclamos();
+                }
+                else{
+                    call= apiService.listarReclamosPorDocumento(usuario.getDocumento());
+                }
+            }else{
+                call= apiService.listarReclamosPorLegajo(inspector.getLegajo());
+            }
 
             try {
                 Response<List<Reclamos>> response = call.execute();

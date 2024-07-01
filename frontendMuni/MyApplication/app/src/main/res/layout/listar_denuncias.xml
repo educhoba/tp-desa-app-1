@@ -50,6 +50,13 @@
 
     </LinearLayout>
 
+    <CheckBox
+        android:id="@+id/checkFiltrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver todas las denuncias"
+        android:textSize="10dp"
+        android:padding="5dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewDenuncias"

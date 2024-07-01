@@ -70,7 +70,6 @@
             android:text="Detalle del Reclamo"
             android:textSize="18sp"
             android:textStyle="bold" />
-
         <!-- Carrusel de imágenes -->
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"

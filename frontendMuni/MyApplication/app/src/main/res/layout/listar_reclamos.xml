@@ -51,6 +51,15 @@
     </LinearLayout>
 
 
+    <CheckBox
+        android:id="@+id/checkFiltrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver todos los reclamos"
+        android:textSize="10dp"
+        android:padding="5dp"
+        android:visibility="gone"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewReclamos"
         android:layout_width="match_parent"

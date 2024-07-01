@@ -3,6 +3,8 @@ package com.example.myapplication.activities;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,6 +29,7 @@ public class VerDenuncias extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private DenunciasAdapter adapter;
+    private CheckBox checkFiltrar;
     Usuarios user;
     String dni;
 
@@ -41,7 +44,17 @@ public class VerDenuncias extends AppCompatActivity {
         user =  (Usuarios) getIntent().getSerializableExtra("usuario");
         dni = user.getDocumento();
 
+        checkFiltrar = findViewById(R.id.checkFiltrar);
 
+
+        checkFiltrar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                checkFiltrar.setSelected(isChecked);
+                new listarDenunciasTask().execute();
+            }
+        });
 
         new listarDenunciasTask().execute();
     }
@@ -51,7 +64,14 @@ public class VerDenuncias extends AppCompatActivity {
         @Override
         protected List<Denuncias> doInBackground(Void... voids) {
             ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
-            Call<List<Denuncias>> call = apiService.getDenuncias();
+            Call<List<Denuncias>> call = null;
+
+            if(checkFiltrar.isChecked()){
+                call= apiService.getDenuncias();
+            }
+            else{
+                call= apiService.listarDenunciasPorDocumento(dni);
+            }
 
             try {
                 Response<List<Denuncias>> response = call.execute();
