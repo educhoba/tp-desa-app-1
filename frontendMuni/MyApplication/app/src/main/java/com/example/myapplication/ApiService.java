@@ -74,7 +74,11 @@ public interface ApiService {
 
     @GET("/sitios")
     Call<List<Sitios>> listarSitios();
+    @GET("/sitios/{idSitio}")
+    Call<Sitios> getSitioPorById(@Path("idSitio") Integer idSitio);
     @GET("/desperfectos")
     Call<List<Desperfectos>> listarDesperfectos();
+    @GET("/desperfectos/{idDesperfecto}")
+    Call<Desperfectos> getDesperfectosPorById(@Path("idDesperfecto") Integer idDesperfecto);
 }
 
