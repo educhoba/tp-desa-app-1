@@ -43,7 +43,7 @@ import com.google.android.material.tabs.TabLayout;
 public class VerDetalleReclamos extends AppCompatActivity {
 
 
-    private TextView textViewId, textViewSitio, textViewDesperfecto, textViewDescripcion,textViewMovimientos;
+    private TextView textViewId, textViewSitio, textViewDesperfecto, textViewDescripcion,textViewMovimientos,textViewEstado;
     private int reclamoId;
     ViewPager viewPager;
     TabLayout tabLayout;
@@ -58,6 +58,7 @@ public class VerDetalleReclamos extends AppCompatActivity {
         textViewDesperfecto = findViewById(R.id.textDesperfecto);
         textViewDescripcion = findViewById(R.id.textDescripcion);
         textViewMovimientos = findViewById(R.id.textMovimientos);
+        textViewEstado= findViewById(R.id.textEstado);
 
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
@@ -96,6 +97,7 @@ public class VerDetalleReclamos extends AppCompatActivity {
             if (reclamo != null) {
                 textViewId.setText("Nro de Reclamo: " + reclamo.getIdReclamo());
                 textViewDescripcion.setText("Descripción: " + reclamo.getDescripcion());
+                textViewEstado.setText("Estado: " + reclamo.getEstado());
                 textViewMovimientos.setText(listaAString(reclamo.getMovimientos()));
                 ImagePagerAdapter adapter = new ImagePagerAdapter(reclamo.getImagenes());
                 viewPager.setAdapter(adapter);
@@ -186,7 +188,7 @@ public class VerDetalleReclamos extends AppCompatActivity {
                 MovimientoReclamo movimiento = lista.get(i);
                 resultado.append("Responsable: '").append(movimiento.getResponsable()).append("'\n");
                 resultado.append("Causa: '").append(movimiento.getCausa()).append("'\n");
-                resultado.append("Fecha: '").append(formatDate(movimiento.getFecha())).append("'\n");
+                resultado.append("Fecha: '").append(formatDate(movimiento.getFecha())).append("'\n\n");
             }
         }else{
             resultado.append("Últimos movimientos: 'Sin movimientos'\n\n");

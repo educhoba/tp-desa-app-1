@@ -71,7 +71,7 @@
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintTop_toBottomOf="@+id/topLayout"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         >
 
         <!-- Carrusel de imágenes -->
@@ -115,6 +115,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Descripción" />
+        <TextView
+            android:id="@+id/textEstado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="" />
         <TextView
             android:id="@+id/textMovimientos"
             android:layout_width="wrap_content"
