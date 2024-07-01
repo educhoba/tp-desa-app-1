@@ -39,6 +39,10 @@ import com.example.myapplication.models.Desperfectos;
 import com.example.myapplication.models.Reclamos;
 import com.example.myapplication.models.Servicios;
 
+import android.widget.AdapterView;
+
+
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,6 +53,11 @@ public class MainActivity extends AppCompatActivity {
     private ServiciosAdapter serviciosAdapter;
     private List<Servicios> serviciosList = new ArrayList<>();
     private Boolean reclamoGuardadoCreado = false;
+    private List<Servicios> todosLosServicios = new ArrayList<>();
+    private String tipoSeleccionado = "comercio"; // Por defecto, selecciona "comercio"
+    private String rubroSeleccionado;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 linearLayoutProfesionales.setVisibility(View.GONE);
                 new ObtenerRubrosUnicosTask().execute("comercio");
                 new ObtenerServiciosTask().execute("comercio");
+                tipoSeleccionado = "comercio";
             }
         });
 
@@ -87,7 +97,23 @@ public class MainActivity extends AppCompatActivity {
                 linearLayoutProfesionales.setVisibility(View.VISIBLE);
                 new ObtenerRubrosUnicosTask().execute("profesional");
                 new ObtenerServiciosTask().execute("profesional");
+                tipoSeleccionado = "profesional";
 
+            }
+        });
+
+        rubroSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                rubroSeleccionado = (String) parent.getItemAtPosition(position);
+                if (!rubroSeleccionado.equals("Elija el rubro")) {
+                    new ObtenerServiciosPorRubroTask().execute(tipoSeleccionado, rubroSeleccionado);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // No hacer nada
             }
         });
 
@@ -171,6 +197,58 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    private void filtrarServiciosPorRubro(List<Servicios> servicios) {
+
+    }
+
+    private class ObtenerServiciosPorRubroTask extends AsyncTask<String, Void, List<Servicios>> {
+        @Override
+        protected List<Servicios> doInBackground(String... params) {
+            String tipo = params[0];
+            String rubro = params[1];
+
+            Retrofit retrofit = RetrofitClient.getClient();
+            ApiService apiService = retrofit.create(ApiService.class);
+
+            Call<List<Servicios>> call = apiService.listarPorTipo(tipo);
+
+            try {
+                Response<List<Servicios>> response = call.execute();
+                if (response.isSuccessful() && response.body() != null) {
+                    return response.body();
+                } else {
+                    return null;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(List<Servicios> servicios) {
+            if (servicios != null) {
+                List<Servicios> serviciosFiltrados = new ArrayList<>();
+                Toast.makeText(MainActivity.this, "rubro seleccionado:" + rubroSeleccionado, Toast.LENGTH_SHORT).show();
+
+                for (Servicios servicio : servicios) {
+                    Toast.makeText(MainActivity.this, "rubro servicio:" + servicio.getRubro(), Toast.LENGTH_SHORT).show();
+                    if (servicio.getRubro().equals(rubroSeleccionado)) {
+
+                        serviciosFiltrados.add(servicio);
+                    }
+                }
+                serviciosList.clear();
+                serviciosList.addAll(serviciosFiltrados);
+                serviciosAdapter.notifyDataSetChanged();
+            } else {
+                Toast.makeText(MainActivity.this, "Error al obtener los servicios por rubro", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
+
 
     private class ObtenerRubrosUnicosTask extends AsyncTask<String, Void, List<String>> {
         @Override
