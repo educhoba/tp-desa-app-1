@@ -93,6 +93,7 @@
             android:layout_marginTop="4dp"
             android:text="Nro de denuncia:" />
 
+
         <TextView
             android:id="@+id/textSitio"
             android:layout_width="wrap_content"
