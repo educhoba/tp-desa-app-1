@@ -43,7 +43,7 @@ public class DenunciasAdapter extends RecyclerView.Adapter<DenunciasAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Denuncias denuncia = denunciasList.get(position);
-        holder.textViewId.setText("ID: " + denuncia.getIdDenuncias());
+        holder.textViewId.setText("Nro de denuncia: " + denuncia.getIdDenuncias());
         holder.textViewSitio.setText("Sitio: " + denuncia.getIdSitio());
         holder.textViewDescripcion.setText("Descripción: " + denuncia.getDescripcion());
         int id = denuncia.getIdDenuncias();
