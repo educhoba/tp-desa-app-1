@@ -1,5 +1,6 @@
 package application.services;
 
+import application.exceptions.SitioManualException;
 import application.models.SitiosManuales;
 import application.repositories.ISitiosManualesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class SitiosManualesService implements IService<SitiosManuales, SitiosMan
 
     @Override
     public SitiosManuales guardar(SitiosManuales entity) {
-        return null;
+        return iRepository.save(entity);
     }
 
     @Override
@@ -39,4 +40,9 @@ public class SitiosManualesService implements IService<SitiosManuales, SitiosMan
         return null;
     }
 
+    public void registrarSitio(SitiosManuales sitioManual) throws SitioManualException {
+        if(false)//wip
+            throw new SitioManualException("bla bla");
+        guardar(sitioManual);
+    }
 }

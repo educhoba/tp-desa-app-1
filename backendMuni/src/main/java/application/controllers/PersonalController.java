@@ -2,17 +2,16 @@
 package application.controllers;
 
 import application.exceptions.PersonalException;
+import application.exceptions.UsuarioException;
 import application.exceptions.VecinoException;
 import application.models.Personal;
+import application.models.Usuarios;
 import application.models.Vecinos;
 import application.services.PersonalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ import java.util.List;
 public class PersonalController {
 
     @Autowired
-    private PersonalService personalService;
+    private PersonalService personalService;  
 
     private PersonalController() { }
 
@@ -43,6 +42,16 @@ public class PersonalController {
         }
         catch (PersonalException ex){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+    @PostMapping("/cambiarContrasenia")
+    public Personal cambiarContrasenia(@RequestBody Personal personal) {
+        try{
+            personalService.cambiarContrasenia(personal);
+            return personal;
+        }
+        catch (PersonalException ex){
+            return null;
         }
     }
 }

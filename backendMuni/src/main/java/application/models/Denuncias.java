@@ -2,6 +2,8 @@ package application.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="denuncias")
 public class Denuncias {
@@ -10,7 +12,24 @@ public class Denuncias {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idDenuncias")
     private Integer idDenuncias;
-
+    @Column(name = "documento", length = 20, nullable = false)
+    private String documento;
+    @Column(name = "idSitio", nullable = true)
+    private Integer idSitio;
+    @Column(name = "descripcion", length = 2000, nullable = true)
+    private String descripcion;
+    @Column(name = "estado", length = 150, nullable = true)
+    private String estado;
+    @Column(name = "aceptaResponsabilidad", nullable = false)
+    private Integer aceptaResponsabilidad;
+    @Column(name = "denunciado", length = 20, nullable = true)
+    private String denunciado;
+    @OneToMany
+    @JoinColumn(name = "idDenuncia", referencedColumnName = "idDenuncias", insertable = false, updatable = false)
+    private List<Imagenes> imagenes;
+    @OneToMany
+    @JoinColumn(name = "idDenuncia", referencedColumnName = "idDenuncias", insertable = false, updatable = false)
+    private List<movimientosDenuncia> movimientos;
     public Denuncias(){
 
     }
@@ -20,8 +39,77 @@ public class Denuncias {
     }
 
     //<editor-fold desc="Getters">
-    public Integer getId(){
-        return this.idDenuncias;
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+
+    public Integer getIdSitio() {
+        return idSitio;
+    }
+
+    public void setIdSitio(Integer idSitio) {
+        this.idSitio = idSitio;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public Integer getAceptaResponsabilidad() {
+        return aceptaResponsabilidad;
+    }
+
+    public void setAceptaResponsabilidad(Integer aceptaResponsabilidad) {
+        this.aceptaResponsabilidad = aceptaResponsabilidad;
+    }
+
+    public Integer getIdDenuncias() {
+        return idDenuncias;
+    }
+
+    public void setIdDenuncias(Integer idDenuncias) {
+        this.idDenuncias = idDenuncias;
+    }
+
+    public List<Imagenes> getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(List<Imagenes> imagenes) {
+        this.imagenes = imagenes;
+    }
+
+    public List<movimientosDenuncia> getMovimientos() {
+        return movimientos;
+    }
+
+    public void setMovimientos(List<movimientosDenuncia> movimientos) {
+        this.movimientos = movimientos;
+    }
+
+    public String getDenunciado() {
+        return denunciado;
+    }
+
+    public void setDenunciado(String denunciado) {
+        this.denunciado = denunciado;
     }
     //</editor-fold>
 

@@ -1,12 +1,16 @@
 package application.services;
 
+import application.exceptions.DenunciaException;
+import application.exceptions.ReclamoException;
 import application.models.Denuncias;
+import application.models.Reclamos;
 import application.repositories.IDenunciasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -26,7 +30,7 @@ public class DenunciasService implements IService<Denuncias, Denuncias> {
 
     @Override
     public Denuncias guardar(Denuncias entity) {
-        return null;
+        return iRepository.save(entity);
     }
 
     @Override
@@ -36,7 +40,32 @@ public class DenunciasService implements IService<Denuncias, Denuncias> {
 
     @Override
     public Denuncias buscarPorId(Integer id) {
-        return null;
+        Optional<Denuncias> ret = iRepository.findByIdDenuncias(id);
+        return ret.orElse(null);
     }
 
+    public Denuncias registrar(Denuncias denuncias) throws DenunciaException {
+
+        if(false) //wip
+            throw new DenunciaException("Error al registrar.");
+
+        guardar(denuncias);
+        return denuncias;
+    }
+
+    public void actualizar(Denuncias denuncias) throws DenunciaException  {
+
+        if(denuncias.getIdDenuncias() == null) //wip
+            throw new DenunciaException("Error al actualizar, id = null");
+
+        guardar(denuncias);
+    }
+
+    public List<Denuncias> listarPorDocumento(String documento) {
+        return iRepository.findByDocumento(documento);
+    }
+
+    public List<Denuncias> listarPorDenunciado(String documento) {
+        return iRepository.findByDenunciado(documento);
+    }
 }

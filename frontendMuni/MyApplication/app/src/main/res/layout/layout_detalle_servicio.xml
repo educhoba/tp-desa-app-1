@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:id="@+id/detalle">
+
+    <TextView
+        android:id="@+id/textViewNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="Nombre del Comercio"
+        android:paddingBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/textViewDireccion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Dirección:"
+        android:paddingBottom="4dp"/>
+
+    <TextView
+        android:id="@+id/textViewHorario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Horario:"
+        android:paddingBottom="4dp"/>
+
+    <TextView
+        android:id="@+id/textViewTelefono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Teléfono:"
+        android:paddingBottom="4dp"/>
+    <TextView
+        android:id="@+id/textViewRubro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Rubro:"
+        android:paddingBottom="4dp"/>
+    <TextView
+        android:id="@+id/textViewDescripcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Descripción:"
+        android:paddingBottom="4dp"/>
+
+</LinearLayout>

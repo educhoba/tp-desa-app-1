@@ -1,12 +1,14 @@
 package application.services;
 
 import application.models.Desperfectos;
+import application.models.Sitios;
 import application.repositories.IDesperfectosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -36,7 +38,10 @@ public class DesperfectosService implements IService<Desperfectos, Desperfectos>
 
     @Override
     public Desperfectos buscarPorId(Integer id) {
-        return null;
+        Optional<Desperfectos> ret = iRepository.findByIdDesperfecto(id);
+        return ret.orElse(null);
     }
-
+    public List<Desperfectos> filtrarPorRubro(Integer idRubro) {
+        return iRepository.findByIdRubro(idRubro);
+    }
 }

@@ -9,6 +9,8 @@ public class Rubros {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idRubro")
     private Integer idRubro;
+    @Column(name = "descripcion",length = 200, nullable = false)
+    private String descripcion;
 
     public Rubros(){
 
@@ -19,8 +21,16 @@ public class Rubros {
     }
 
     //<editor-fold desc="Getters">
-    public Integer getId(){
+    public Integer getIdRubro(){
         return this.idRubro;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
     //</editor-fold>
 

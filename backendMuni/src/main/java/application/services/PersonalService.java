@@ -47,7 +47,11 @@ public class PersonalService implements IService<Personal, Personal> {
         else
             throw new PersonalException("No existe un personal con ese documento.");
     }
-
+    public void cambiarContrasenia(Personal personal) throws PersonalException {
+        Personal p = buscarPersonal(personal.getDocumento());
+        p.setPassword(personal.getPassword().trim());
+        guardar(p);
+    }
     @Override
     public Personal buscarPorId(Integer id) {
         return null;

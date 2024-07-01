@@ -1,7 +1,8 @@
-package application.services;
+package old;
 
-import application.models.Comercios;
-import application.repositories.IComerciosRepository;
+import application.services.IService;
+import old.Comercios;
+import old.IComerciosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

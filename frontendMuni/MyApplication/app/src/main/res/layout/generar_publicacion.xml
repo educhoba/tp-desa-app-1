@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible"
+    tools:context=".activities.PerfilUser"
+    tools:visibility="visible"
+    android:background="@drawable/fondo">
+
+    <include layout="@layout/barra_navegacion"/>
+
+    <LinearLayout
+        android:id="@+id/constraint_usuario"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:paddingTop="20dp"
+        >
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/user"/>
+
+
+        <TextView
+            android:id="@+id/nombre_usuario"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Usuario"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <ImageView
+            android:id="@+id/configImage"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/baseline_settings_24"
+            android:layout_marginEnd="20dp"/>
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/constraint_usuario"
+        android:layout_marginTop="50dp"
+        >
+
+        <TextView
+            android:id="@+id/texto_publicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Generar Publicación"
+            android:textSize="30dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"/>
+
+
+
+
+        <LinearLayout
+            android:id="@+id/layoutLin"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+            android:layout_margin="16dp"
+            android:background="@drawable/card_border"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Seleccione el servicio"
+                    android:textStyle="bold"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="26dp"
+                    android:text="Comercio"
+                    android:textSize="12dp"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="26dp"
+                    android:text="Profesional"
+                    android:textSize="12dp"/>
+
+            </RadioGroup>
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/Nombre"
+                android:hint="Nombre"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/Direccion"
+                android:hint="Dirección"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/horario"
+                android:hint="Horario"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/telefono"
+                android:hint="Teléfono"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/rubro"
+                android:hint="Rubro"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/descripcion"
+                android:hint="Descripción"
+                android:paddingBottom="30dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"/>
+
+
+            <Button
+                android:id="@+id/button_image"
+                android:layout_width="wrap_content"
+                android:layout_height="33dp"
+                android:backgroundTint="@color/blue"
+                android:drawableLeft="@drawable/file"
+                android:text="Adjuntar imágenes"
+                android:textSize="10dp" />
+
+
+
+
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Generar"
+            android:backgroundTint="@color/blue"/>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

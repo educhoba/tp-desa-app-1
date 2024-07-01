@@ -1,12 +1,14 @@
 package application.services;
 
 import application.models.Rubros;
+import application.models.Sitios;
 import application.repositories.IRubrosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -36,7 +38,8 @@ public class RubrosService implements IService<Rubros, Rubros> {
 
     @Override
     public Rubros buscarPorId(Integer id) {
-        return null;
+        Optional<Rubros> ret = iRepository.findByIdRubro(id);
+        return ret.orElse(null);
     }
 
 }

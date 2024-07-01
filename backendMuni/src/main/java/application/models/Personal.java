@@ -39,7 +39,7 @@ public class Personal {
         this.password = password;
         this.sector = sector;
         this.codigoBarrio = codigoBarrio;
-        this.fechaIngreso = fechaIngreso;
+       // this.fechaIngreso = fechaIngreso;
     }
 
     //<editor-fold desc="Getters">
@@ -70,13 +70,17 @@ public class Personal {
     public int getCodigoBarrio() {
         return codigoBarrio;
     }
-
+/* 
     public Date getFechaIngreso() {
         return fechaIngreso;
-    }
+    }*/
     //</editor-fold>
 
     //<editor-fold desc="Setters">
+
+    public void setPassword(String pass){
+        this.password = pass;
+    }
     //</editor-fold>
 
 
