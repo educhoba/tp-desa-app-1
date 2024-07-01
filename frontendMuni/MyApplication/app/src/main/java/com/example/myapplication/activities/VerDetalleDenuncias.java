@@ -26,11 +26,15 @@ public class VerDetalleDenuncias extends AppCompatActivity {
     private int denunciaId;
     ViewPager viewPager;
     TabLayout tabLayout;
+    String dni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.verunreclamo);
+        setContentView(R.layout.verunadenuncia);
+
+
+
 
         textViewId = findViewById(R.id.textId);
         textViewSitio = findViewById(R.id.textSitio);
@@ -41,6 +45,8 @@ public class VerDetalleDenuncias extends AppCompatActivity {
 
         // Obtener el ID de la denuncia del Intent
         denunciaId = getIntent().getIntExtra("DENUNCIA_ID", -1);
+        //Obtener el dni de la persona logueada
+        dni = getIntent().getStringExtra("dnilogueado");
 
         // Llamar al método para obtener los detalles de la denuncia
         if (denunciaId != -1) {
@@ -71,6 +77,9 @@ public class VerDetalleDenuncias extends AppCompatActivity {
         @Override
         protected void onPostExecute(Denuncias denuncia) {
             if (denuncia != null) {
+
+
+
                 textViewId.setText("ID: " + denuncia.getIdDenuncias());
                 textViewSitio.setText("Sitio: " + denuncia.getIdSitio());
                 textViewDescripcion.setText("Descripción: " + denuncia.getDescripcion());

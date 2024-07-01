@@ -15,6 +15,7 @@ import com.example.myapplication.ReclamosAdapter;
 import com.example.myapplication.RetrofitClient;
 import com.example.myapplication.models.Denuncias;
 import com.example.myapplication.models.Reclamos;
+import com.example.myapplication.models.Usuarios;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,6 +27,8 @@ public class VerDenuncias extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private DenunciasAdapter adapter;
+    Usuarios user;
+    String dni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,10 @@ public class VerDenuncias extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerViewDenuncias);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        user =  (Usuarios) getIntent().getSerializableExtra("usuario");
+        dni = user.getDocumento();
+
+
 
         new listarDenunciasTask().execute();
     }
@@ -62,7 +69,7 @@ public class VerDenuncias extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<Denuncias> denuncias) {
             if (denuncias != null) {
-                adapter = new DenunciasAdapter(denuncias);
+                adapter = new DenunciasAdapter(denuncias,dni);
                 recyclerView.setAdapter(adapter);
             } else {
                 Log.e("listarDenunciasTask", "No se recibieron datos de reclamos");

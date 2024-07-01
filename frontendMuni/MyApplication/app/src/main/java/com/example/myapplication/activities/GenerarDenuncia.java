@@ -33,6 +33,7 @@ import com.example.myapplication.models.Imagenes;
 import com.example.myapplication.models.Reclamos;
 import com.example.myapplication.models.Sitios;
 import com.example.myapplication.models.SitiosManuales;
+import com.example.myapplication.models.Usuarios;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -62,6 +63,7 @@ public class GenerarDenuncia extends AppCompatActivity {
     private static final int REQUEST_CODE_SELECT_IMAGES = 19;//dice que no hay limite pero 20 es un monton
 
     private Integer SitioSeleccionado = 0;
+    Usuarios user;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +80,9 @@ public class GenerarDenuncia extends AppCompatActivity {
         descripcionDenunciaText = findViewById(R.id.descripcionDenuncia);
         //nombreComercioDenunciadoText = findViewById(R.id.nombrecom);
         documentoVecinoDenunciadoText = findViewById(R.id.docveci);
+        user =  (Usuarios) getIntent().getSerializableExtra("usuario");
+
+
 
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -131,7 +136,7 @@ public class GenerarDenuncia extends AppCompatActivity {
             // Crear objeto Denuncias
             Denuncias denuncia = new Denuncias();
             denuncia.setAceptaResponsabilidad(1);//(true)
-            denuncia.setDocumento("DNI28000046"); //TODO PONER EL DEL USUARIO
+            denuncia.setDocumento(user.getDocumento()); //TODO PONER EL DEL USUARIO
 
             if (tipoDenuncia.equals("vecino")) {
                 if(documentoVecinoDenunciadoText.getText().toString().isEmpty()){
@@ -358,6 +363,7 @@ public class GenerarDenuncia extends AppCompatActivity {
                                 Toast.makeText(GenerarDenuncia.this, "" +
                                         "Denuncia registrada correctamente", Toast.LENGTH_SHORT).show();
                                 limpiarFormulario();
+
                             }
                         });
                     } else {

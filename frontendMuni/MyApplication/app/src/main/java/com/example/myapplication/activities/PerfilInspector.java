@@ -20,7 +20,6 @@ public class PerfilInspector extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.perfil_inspector);
 
-        btn_back = findViewById(R.id.btn_back);
         home = findViewById(R.id.home);
         config = findViewById(R.id.configImage);
 

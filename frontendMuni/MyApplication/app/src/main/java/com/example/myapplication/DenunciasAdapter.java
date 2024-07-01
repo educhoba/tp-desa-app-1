@@ -22,11 +22,14 @@ public class DenunciasAdapter extends RecyclerView.Adapter<DenunciasAdapter.View
 
     private List<Denuncias> denunciasList;
     private Context context;
+    private String dni;
 
 
-    public DenunciasAdapter(List<Denuncias> denunciasList) {
+    public DenunciasAdapter(List<Denuncias> denunciasList,String dni) {
         this.denunciasList = denunciasList;
         this.context = context;
+        this.dni = dni;
+
 
     }
 
@@ -50,6 +53,7 @@ public class DenunciasAdapter extends RecyclerView.Adapter<DenunciasAdapter.View
         holder.buttonVerDetalle.setOnClickListener(v -> {
             Intent intent = new Intent(holder.itemView.getContext(), VerDetalleDenuncias.class);
             intent.putExtra("DENUNCIA_ID", id);
+            intent.putExtra("dnilogueado",dni);
             holder.itemView.getContext().startActivity(intent);
         });
     }

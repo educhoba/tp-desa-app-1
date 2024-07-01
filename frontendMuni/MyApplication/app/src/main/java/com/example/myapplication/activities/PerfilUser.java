@@ -14,9 +14,8 @@ import com.example.myapplication.models.Usuarios;
 
 public class PerfilUser extends AppCompatActivity {
     ImageView btn_back;
-
-    ImageView home;
     Usuarios user;
+    ImageView home;
     ImageView config;
 
 
@@ -25,10 +24,7 @@ public class PerfilUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.perfil_user);
-
-        btn_back = findViewById(R.id.btn_back);
         home = findViewById(R.id.home);
-
         //Button btn = findViewById(R.id.Password);
         Button btn_generar_publicacion = findViewById(R.id.btn_generar_publicacion);
         Button btn_generar_reclamo = findViewById(R.id.btn_generar_reclamo);
@@ -50,6 +46,14 @@ public class PerfilUser extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(PerfilUser.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btn_generar_publicacion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +69,7 @@ public class PerfilUser extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(PerfilUser.this, GenerarDenuncia.class);
+                intent.putExtra("usuario",user);
                 startActivity(intent);
             }
         });
