@@ -22,7 +22,7 @@ import retrofit2.Response;
 public class VerDetalleDenuncias extends AppCompatActivity {
 
 
-    private TextView textViewId, textViewSitio, textViewDescripcion, textViewEstado;
+    private TextView textViewId, textViewSitio, textViewDescripcion, textViewEstado,textViewMovimientos;
     private int denunciaId;
     ViewPager viewPager;
     TabLayout tabLayout;
@@ -37,6 +37,8 @@ public class VerDetalleDenuncias extends AppCompatActivity {
         textViewSitio = findViewById(R.id.textSitio);
         textViewEstado = findViewById(R.id.textEstado);
         textViewDescripcion = findViewById(R.id.textDescripcion);
+        textViewMovimientos = findViewById(R.id.textMovimientos);
+
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
 
@@ -78,6 +80,7 @@ public class VerDetalleDenuncias extends AppCompatActivity {
                     textViewId.setText("Nro de denuncia: " + denuncia.getIdDenuncias());
                     textViewSitio.setText("Sitio: " + denuncia.getIdSitio());
                     textViewDescripcion.setText("Descripción: " + denuncia.getDescripcion());
+                    textViewMovimientos.setText("Movimientos: " + denuncia.getDescripcion());
                     textViewEstado.setText("Estado: " + denuncia.getEstado());
                     ImagePagerAdapter adapter = new ImagePagerAdapter(denuncia.getImagenes());
                     viewPager.setAdapter(adapter);
@@ -86,6 +89,7 @@ public class VerDetalleDenuncias extends AppCompatActivity {
                     textViewId.setText("Nro de denuncia: " + denuncia.getIdDenuncias());
                     textViewSitio.setText("Sitio: " + denuncia.getIdSitio());
                     textViewDescripcion.setText("Descripción: " + denuncia.getDescripcion());
+                    textViewMovimientos.setText("Movimientos: " + denuncia.getDescripcion());
                     ImagePagerAdapter adapter = new ImagePagerAdapter(denuncia.getImagenes());
                     viewPager.setAdapter(adapter);
                     tabLayout.setupWithViewPager(viewPager, true);

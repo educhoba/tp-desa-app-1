@@ -37,7 +37,7 @@ import com.google.android.material.tabs.TabLayout;
 public class VerDetalleReclamos extends AppCompatActivity {
 
 
-    private TextView textViewId, textViewSitio, textViewDesperfecto, textViewDescripcion;
+    private TextView textViewId, textViewSitio, textViewDesperfecto, textViewDescripcion,textViewMovimientos;
     private int reclamoId;
     ViewPager viewPager;
     TabLayout tabLayout;
@@ -51,6 +51,8 @@ public class VerDetalleReclamos extends AppCompatActivity {
         textViewSitio = findViewById(R.id.textSitio);
         textViewDesperfecto = findViewById(R.id.textDesperfecto);
         textViewDescripcion = findViewById(R.id.textDescripcion);
+        textViewMovimientos = findViewById(R.id.textMovimientos);
+
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
 
@@ -86,10 +88,11 @@ public class VerDetalleReclamos extends AppCompatActivity {
         @Override
         protected void onPostExecute(Reclamos reclamo) {
             if (reclamo != null) {
-                textViewId.setText("ID: " + reclamo.getIdReclamo());
+                textViewId.setText("Nro de Reclamo: " + reclamo.getIdReclamo());
                 textViewSitio.setText("Sitio: " + reclamo.getIdSitio());
                 textViewDesperfecto.setText("Desperfecto: " + reclamo.getIdDesperfecto());
                 textViewDescripcion.setText("Descripción: " + reclamo.getDescripcion());
+                textViewMovimientos.setText("Movimientos: " + reclamo.getDescripcion());
                 ImagePagerAdapter adapter = new ImagePagerAdapter(reclamo.getImagenes());
                 viewPager.setAdapter(adapter);
                 tabLayout.setupWithViewPager(viewPager, true);

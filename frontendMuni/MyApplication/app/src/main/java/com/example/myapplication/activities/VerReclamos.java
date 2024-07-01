@@ -19,12 +19,17 @@ import retrofit2.Response;
 import com.example.myapplication.ApiService;
 import com.example.myapplication.R;
 import com.example.myapplication.RetrofitClient;
+import com.example.myapplication.models.Inspector;
 import com.example.myapplication.models.Reclamos;
+import com.example.myapplication.models.Usuarios;
 
 public class VerReclamos extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ReclamosAdapter adapter;
+    String cargo;
+    Usuarios usuario;
+    Inspector inspector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,13 @@ public class VerReclamos extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerViewReclamos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        cargo = getIntent().getStringExtra("cargo");
+
+        if (cargo.equals("Usuario")){
+            usuario =  (Usuarios) getIntent().getSerializableExtra("usuario");
+        }else{
+            inspector =  (Inspector) getIntent().getSerializableExtra("usuario");
+        }
 
         new listarReclamosTask().execute();
     }

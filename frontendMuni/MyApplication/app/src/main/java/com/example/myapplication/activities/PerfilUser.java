@@ -99,6 +99,8 @@ public class PerfilUser extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(PerfilUser.this, VerReclamos.class);
+                intent.putExtra("cargo",cargo);
+                intent.putExtra("usuario",user);
                 startActivity(intent);
             }
         });
