@@ -92,7 +92,7 @@ public class VerDetalleReclamos extends AppCompatActivity {
                 textViewSitio.setText("Sitio: " + reclamo.getIdSitio());
                 textViewDesperfecto.setText("Desperfecto: " + reclamo.getIdDesperfecto());
                 textViewDescripcion.setText("Descripción: " + reclamo.getDescripcion());
-                textViewMovimientos.setText("Movimientos: " + reclamo.getDescripcion());
+                textViewMovimientos.setText("Movimientos: " + reclamo.getMovimientos());
                 ImagePagerAdapter adapter = new ImagePagerAdapter(reclamo.getImagenes());
                 viewPager.setAdapter(adapter);
                 tabLayout.setupWithViewPager(viewPager, true);

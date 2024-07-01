@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.os.AsyncTask;
 
@@ -38,6 +39,7 @@ public class configuracion extends AppCompatActivity {
         EditText editTextActualPassword = findViewById(R.id.contrasenia_ant);
         EditText editTextNewPassword = findViewById(R.id.contrasenia_nueva);
         Button buttonChangePassword = findViewById(R.id.Registro_button);
+        LinearLayout cerrarSesion = findViewById(R.id.cerrarSesion);
 
         buttonChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +62,17 @@ public class configuracion extends AppCompatActivity {
                 } else {
                     new CambiarContraseniaTask(actualPassword, newPassword).execute(inspector);
                 }
+            }
+        });
+
+        cerrarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(configuracion.this, MainActivity.class);
+                intent.removeExtra("cargo");
+                intent.removeExtra("usuario");
+                startActivity(intent);
+
             }
         });
     }

@@ -32,11 +32,14 @@ public class PerfilUser extends AppCompatActivity {
         Button btn_generar_denuncia = findViewById(R.id.btn_generar_denuncia);
         Button btn_ver_reclamos = findViewById(R.id.btn_ver_reclamos);
         Button btn_ver_denuncias = findViewById(R.id.btn_ver_denuncias);
+        Button btn_comyprof = findViewById(R.id.btn_comyprof);
+
 
 
         config = findViewById(R.id.configImage);
         String cargo = getIntent().getStringExtra("cargo");
         user =  (Usuarios) getIntent().getSerializableExtra("usuario");
+
 
         config.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +113,17 @@ public class PerfilUser extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(PerfilUser.this, VerDenuncias.class);
+                intent.putExtra("usuario",user);
+                startActivity(intent);
+            }
+        });
+
+        btn_comyprof.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(PerfilUser.this, MainActivity.class);
+                intent.putExtra("cargo",cargo);
                 intent.putExtra("usuario",user);
                 startActivity(intent);
             }

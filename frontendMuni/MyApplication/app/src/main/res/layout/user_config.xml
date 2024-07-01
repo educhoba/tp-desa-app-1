@@ -82,6 +82,25 @@
                 android:layout_marginTop="20dp"
                 android:backgroundTint="@color/blue"/>
 
+            <LinearLayout
+                android:id="@+id/cerrarSesion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_logout_24"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cerrar Sesión"
+                    android:textSize="18sp"
+                    />
+            </LinearLayout>
+
         </LinearLayout>
 
 

@@ -80,7 +80,7 @@ public class VerDetalleDenuncias extends AppCompatActivity {
                     textViewId.setText("Nro de denuncia: " + denuncia.getIdDenuncias());
                     textViewSitio.setText("Sitio: " + denuncia.getIdSitio());
                     textViewDescripcion.setText("Descripción: " + denuncia.getDescripcion());
-                    textViewMovimientos.setText("Movimientos: " + denuncia.getDescripcion());
+                    textViewMovimientos.setText("Movimientos: " + denuncia.getMovimientos());
                     textViewEstado.setText("Estado: " + denuncia.getEstado());
                     ImagePagerAdapter adapter = new ImagePagerAdapter(denuncia.getImagenes());
                     viewPager.setAdapter(adapter);
@@ -89,7 +89,7 @@ public class VerDetalleDenuncias extends AppCompatActivity {
                     textViewId.setText("Nro de denuncia: " + denuncia.getIdDenuncias());
                     textViewSitio.setText("Sitio: " + denuncia.getIdSitio());
                     textViewDescripcion.setText("Descripción: " + denuncia.getDescripcion());
-                    textViewMovimientos.setText("Movimientos: " + denuncia.getDescripcion());
+                    textViewMovimientos.setText("Movimientos: " + denuncia.getMovimientos());
                     ImagePagerAdapter adapter = new ImagePagerAdapter(denuncia.getImagenes());
                     viewPager.setAdapter(adapter);
                     tabLayout.setupWithViewPager(viewPager, true);

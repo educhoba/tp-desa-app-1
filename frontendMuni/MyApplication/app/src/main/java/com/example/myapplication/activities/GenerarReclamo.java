@@ -155,7 +155,7 @@ public class GenerarReclamo extends AppCompatActivity {
                 inspector =  (Inspector) getIntent().getSerializableExtra("usuario");
                 reclamo.setLegajo(inspector.getLegajo());
             }
-             //TODO PONER EL DEL USUARIO
+
             if (modoCarga.equals("opciones")) {
                 if(SitioSeleccionado < 1){
                     Toast.makeText(GenerarReclamo.this, "Seleccione un sitio.", Toast.LENGTH_SHORT).show();

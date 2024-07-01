@@ -36,8 +36,10 @@ import com.example.myapplication.RetrofitClient;
 import com.example.myapplication.ServiciosAdapter;
 import com.example.myapplication.data.ReclamosLocalHelper;
 import com.example.myapplication.models.Desperfectos;
+import com.example.myapplication.models.Inspector;
 import com.example.myapplication.models.Reclamos;
 import com.example.myapplication.models.Servicios;
+import com.example.myapplication.models.Usuarios;
 
 import android.widget.AdapterView;
 
@@ -56,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
     private List<Servicios> todosLosServicios = new ArrayList<>();
     private String tipoSeleccionado = "comercio"; // Por defecto, selecciona "comercio"
     private String rubroSeleccionado;
+    private String cargo;
+    private Usuarios usuario;
+    private Inspector inspector;
 
 
 
@@ -74,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewServicios.setLayoutManager(new LinearLayoutManager(this));
         serviciosAdapter = new ServiciosAdapter(serviciosList);
         recyclerViewServicios.setAdapter(serviciosAdapter);
+        cargo = getIntent().getStringExtra("cargo");
+
 
 
         new ObtenerRubrosUnicosTask().execute("comercio");
@@ -122,9 +129,25 @@ public class MainActivity extends AppCompatActivity {
         botonEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Realiza la acción deseada aquí, como iniciar otra actividad
-                Intent intent = new Intent(MainActivity.this, Login1.class);
-                startActivity(intent);
+                if (cargo!=null){
+                    if (cargo.equals("Usuario")){
+                        usuario = (Usuarios) getIntent().getSerializableExtra("usuario");
+                        Intent intent = new Intent(MainActivity.this, PerfilUser.class);
+                        intent.putExtra("cargo",cargo);
+                        intent.putExtra("usuario",usuario);
+                        startActivity(intent);
+
+                    }else if (cargo.equals("Inspector")){
+                        inspector = (Inspector) getIntent().getSerializableExtra("usuario");
+                        Intent intent = new Intent(MainActivity.this, PerfilInspector.class);
+                        intent.putExtra("cargo",cargo);
+                        intent.putExtra("usuario",inspector);
+                        startActivity(intent);
+                    }
+                }else{
+                    Intent intent = new Intent(MainActivity.this, Login1.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -229,11 +252,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(List<Servicios> servicios) {
             if (servicios != null) {
                 List<Servicios> serviciosFiltrados = new ArrayList<>();
-                Toast.makeText(MainActivity.this, "rubro seleccionado:" + rubroSeleccionado, Toast.LENGTH_SHORT).show();
-
-                for (Servicios servicio : servicios) {
-                    Toast.makeText(MainActivity.this, "rubro servicio:" + servicio.getRubro(), Toast.LENGTH_SHORT).show();
-                    if (servicio.getRubro().equals(rubroSeleccionado)) {
+                for (Servicios servicio : servicios) {if (servicio.getRubro().equals(rubroSeleccionado)) {
 
                         serviciosFiltrados.add(servicio);
                     }

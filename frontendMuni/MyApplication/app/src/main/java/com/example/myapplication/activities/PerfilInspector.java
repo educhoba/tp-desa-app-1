@@ -16,8 +16,8 @@ public class PerfilInspector extends AppCompatActivity {
     ImageView home;
     Inspector inspector;
     ImageView config;
-    Button btn_generar_reclamo;
-    Button btn_ver_reclamo;
+    Button btn_generar_reclamo, btn_comyprof,btn_ver_reclamo;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +27,7 @@ public class PerfilInspector extends AppCompatActivity {
         config = findViewById(R.id.configImage);
         btn_generar_reclamo = findViewById(R.id.btn_generar_reclamo);
         btn_ver_reclamo = findViewById(R.id.btn_ver_reclamos);
-
+        btn_comyprof = findViewById(R.id.btn_comyprof);
 
         String cargo = getIntent().getStringExtra("cargo");
         inspector =  (Inspector) getIntent().getSerializableExtra("usuario");
@@ -55,6 +55,17 @@ public class PerfilInspector extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PerfilInspector.this, VerReclamos.class);
+                intent.putExtra("cargo",cargo);
+                intent.putExtra("usuario",inspector);
+                startActivity(intent);
+            }
+        });
+
+        btn_comyprof.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(PerfilInspector.this, MainActivity.class);
                 intent.putExtra("cargo",cargo);
                 intent.putExtra("usuario",inspector);
                 startActivity(intent);
