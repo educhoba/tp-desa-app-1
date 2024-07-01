@@ -1,10 +1,17 @@
 package com.example.myapplication.models;
 
+import android.content.ContentValues;
+
+
+import com.example.myapplication.data.DataContract;
+import android.content.ContentValues;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
+
+//import kotlinx.coroutines.DisposeOnCompletion;
 
 public class Reclamos {
     @SerializedName("idReclamo")
@@ -22,7 +29,7 @@ public class Reclamos {
     @SerializedName("estado")
     private String estado;
     @SerializedName("idReclamoUnificado")
-    private String idReclamoUnificado;
+    private Integer idReclamoUnificado;
     @SerializedName("imagenes")
     private List<Imagenes> imagenes; // Asegúrate de tener la clase Imagen definida correctamente si es un tipo complejo
     @SerializedName("movimientos")
@@ -91,11 +98,11 @@ public class Reclamos {
         this.estado = estado;
     }
 
-    public String getIdReclamoUnificado() {
+    public Integer getIdReclamoUnificado() {
         return idReclamoUnificado;
     }
 
-    public void setIdReclamoUnificado(String idReclamoUnificado) {
+    public void setIdReclamoUnificado(Integer idReclamoUnificado) {
         this.idReclamoUnificado = idReclamoUnificado;
     }
 
@@ -122,5 +129,24 @@ public class Reclamos {
     public void setSitiosManuales(List<SitiosManuales> sitiosManuales) {
         this.sitiosManuales = sitiosManuales;
     }
-
+    public ContentValues toContentValues(){
+        ContentValues cv = new ContentValues();
+        cv.put(DataContract.ReclamosEntry.ID,idReclamo);
+        cv.put(DataContract.ReclamosEntry.DOCUMENTO, documento);
+        cv.put(DataContract.ReclamosEntry.LEGAJO, legajo);
+        cv.put(DataContract.ReclamosEntry.IDSITIO, idSitio);
+        cv.put(DataContract.ReclamosEntry.IDDESPERFECTO, idDesperfecto);
+        cv.put(DataContract.ReclamosEntry.DESCRIPCION, descripcion);
+        cv.put(DataContract.ReclamosEntry.ESTADO, estado);
+        cv.put(DataContract.ReclamosEntry.IDRECLAMOUNIFICADO, idReclamoUnificado);
+        cv.put(DataContract.ReclamosEntry.SITIOMANUAL, sitiosManuales != null?( sitiosManuales.isEmpty()?null:sitiosManuales.get(0).getDescripcion()):null);
+        cv.put(DataContract.ReclamosEntry.IMAGEN_1, imagenes != null?( imagenes.isEmpty()? null:imagenes.get(0).getData()):null);
+        cv.put(DataContract.ReclamosEntry.IMAGEN_2, imagenes != null?( imagenes.size() < 2? null:imagenes.get(1).getData()):null);
+        cv.put(DataContract.ReclamosEntry.IMAGEN_3, imagenes != null?( imagenes.size() < 3? null:imagenes.get(2).getData()):null);
+        cv.put(DataContract.ReclamosEntry.IMAGEN_4, imagenes != null?( imagenes.size() < 4? null:imagenes.get(3).getData()):null);
+        cv.put(DataContract.ReclamosEntry.IMAGEN_5, imagenes != null?( imagenes.size() < 5? null:imagenes.get(4).getData()):null);
+        cv.put(DataContract.ReclamosEntry.IMAGEN_6, imagenes != null?( imagenes.size() < 6? null:imagenes.get(5).getData()):null);
+        cv.put(DataContract.ReclamosEntry.IMAGEN_7, imagenes != null?( imagenes.size() < 7? null:imagenes.get(6).getData()):null);
+        return cv;
+    }
 }

@@ -1,9 +1,13 @@
 package com.example.myapplication.activities;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,11 +24,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.ApiService;
 import com.example.myapplication.R;
 import com.example.myapplication.RetrofitClient;
+import com.example.myapplication.data.ReclamosLocalHelper;
 import com.example.myapplication.models.Desperfectos;
 import com.example.myapplication.models.Imagenes;
 import com.example.myapplication.models.Reclamos;
@@ -61,6 +67,9 @@ public class GenerarReclamo extends AppCompatActivity {
     private Integer SitioSeleccionado = 0;
     private Integer DesperfectoSeleccionado = 0;
     private Integer SitioManualIdHardcodeado = 1;
+
+    private ConnectivityManager cm;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,7 +165,7 @@ public class GenerarReclamo extends AppCompatActivity {
 
             reclamo.setImagenes(listaImagenesBase64);
 
-            new RegistrarReclamoTask().execute(reclamo);
+            testConectividad(reclamo);
     }
 
     // Método para obtener el modo de carga seleccionado
@@ -445,7 +454,7 @@ public class GenerarReclamo extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(GenerarReclamo.this, "Servicio registrado correctamente", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(GenerarReclamo.this, "Reclamo registrado correctamente", Toast.LENGTH_SHORT).show();
                                 limpiarFormulario();
                             }
                         });
@@ -453,7 +462,7 @@ public class GenerarReclamo extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(GenerarReclamo.this, "Error al registrar el servicio", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(GenerarReclamo.this, "Error al registrar el reclamo", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -480,6 +489,43 @@ public class GenerarReclamo extends AppCompatActivity {
         sitioDireccionManual.setText("");
         radioGroup.clearCheck();
         listaImagenesBase64.clear();
+    }
+
+    private void testConectividad(Reclamos reclamo) {
+
+        cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo ni = cm.getActiveNetworkInfo();
+
+        if (ni != null && ni.isConnected() && ni.getType() == ConnectivityManager.TYPE_WIFI) {
+
+            new RegistrarReclamoTask().execute(reclamo);
+        }
+        else
+        {
+            new AlertDialog.Builder(this)
+                    .setTitle("Crear reclamo sin WIFI?")
+                    .setMessage("Por favor, si desea usar sus datos de redes, presione 'Usar datos'. Si no, se almacenará localmente hasta que se conecte al WIFI.")
+                    .setPositiveButton("Usar datos", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            new RegistrarReclamoTask().execute(reclamo);
+
+                        }
+                    })
+                    .setNegativeButton("Almacenar localmente", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            ReclamosLocalHelper rh = new ReclamosLocalHelper(GenerarReclamo.this);
+                            rh.saveReclamo(reclamo);
+
+                            Toast.makeText(GenerarReclamo.this, "Reclamo almacenado!", Toast.LENGTH_SHORT).show();
+                            limpiarFormulario();
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_info)
+                    .show();
+        }
     }
 
 }

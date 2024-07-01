@@ -25,7 +25,7 @@ public class Reclamos {
     @Column(name = "estado", length = 30, nullable = true)
     private String estado;
     @Column(name = "idReclamoUnificado", nullable = true)
-    private String idReclamoUnificado;
+    private Integer idReclamoUnificado;
     @OneToMany
     @JoinColumn(name = "idReclamo", referencedColumnName = "idReclamo", insertable = false, updatable = false)
     private List<Imagenes> imagenes;
@@ -91,11 +91,11 @@ public class Reclamos {
         this.descripcion = descripcion;
     }
 
-    public String getIdReclamoUnificado() {
+    public Integer getIdReclamoUnificado() {
         return idReclamoUnificado;
     }
 
-    public void setIdReclamoUnificado(String idReclamoUnificado) {
+    public void setIdReclamoUnificado(Integer idReclamoUnificado) {
         this.idReclamoUnificado = idReclamoUnificado;
     }
 

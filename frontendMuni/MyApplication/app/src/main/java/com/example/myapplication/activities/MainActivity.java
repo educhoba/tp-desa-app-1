@@ -1,5 +1,9 @@
 package com.example.myapplication.activities;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.content.Intent;
@@ -10,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -29,7 +34,9 @@ import com.example.myapplication.ApiService;
 import com.example.myapplication.R;
 import com.example.myapplication.RetrofitClient;
 import com.example.myapplication.ServiciosAdapter;
+import com.example.myapplication.data.ReclamosLocalHelper;
 import com.example.myapplication.models.Desperfectos;
+import com.example.myapplication.models.Reclamos;
 import com.example.myapplication.models.Servicios;
 
 
@@ -41,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewServicios;
     private ServiciosAdapter serviciosAdapter;
     private List<Servicios> serviciosList = new ArrayList<>();
+    private Boolean reclamoGuardadoCreado = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,8 +104,48 @@ public class MainActivity extends AppCompatActivity {
 
         //probarCall();
 
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo ni = cm.getActiveNetworkInfo();
+
+        if (ni != null && ni.isConnected() && ni.getType() == ConnectivityManager.TYPE_WIFI) {
+
+            ReclamosLocalHelper helper = new ReclamosLocalHelper(this);
+            List<Reclamos> reclamos = helper.getReclamos();
+            if(reclamos != null && !reclamos.isEmpty()){
+                new AlertDialog.Builder(this)
+                        .setTitle("Hay reclamos guardados!")
+                        .setMessage("Quiere subirlos ahora?")
+                        .setPositiveButton("Si!", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                reclamoGuardadoCreado = false;
+                                generarReclamosGuardados();
+
+                            }
+                        })
+                        .setNegativeButton("No, despues.", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_info)
+                        .show();
+            }
+        }
+
     }
 
+    private void generarReclamosGuardados(){
+        //Recupero todos los clubes y los cargo en un arrayList
+        ReclamosLocalHelper helper = new ReclamosLocalHelper(this);
+        List<Reclamos> reclamos = helper.getReclamos();
+
+        for (Reclamos r: reclamos
+             ) {
+            new RegistrarReclamoTask().execute(r);
+        }
+        if(reclamoGuardadoCreado)
+            helper.deleteAllReclamos();
+    }
     private void probarCall() {
         Retrofit retrofit = RetrofitClient.getClient();
         ApiService service = retrofit.create(ApiService.class);
@@ -222,6 +270,51 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Error al obtener los servicios", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+    private class RegistrarReclamoTask extends AsyncTask<Reclamos, Void, Void> {
 
+        @Override
+        protected Void doInBackground(Reclamos... reclamos) {
+            Reclamos reclamo = reclamos[0];
+
+            // Realizar la llamada Retrofit para registrar el servicio
+            Retrofit retrofit = RetrofitClient.getClient();
+            ApiService apiService = retrofit.create(ApiService.class);
+
+            Call<Void> call = apiService.registrarReclamo(reclamo);
+            call.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(MainActivity.this, "Reclamo registrado correctamente", Toast.LENGTH_SHORT).show();
+                                reclamoGuardadoCreado = true;
+                            }
+                        });
+                    } else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(MainActivity.this, "Error al registrar el reclamo", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(MainActivity.this, "Error en la solicitud: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
+
+            return null;
+        }
     }
 }
