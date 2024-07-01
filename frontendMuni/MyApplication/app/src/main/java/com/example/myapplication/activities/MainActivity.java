@@ -118,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
                         .setMessage("Quiere subirlos ahora?")
                         .setPositiveButton("Si!", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                reclamoGuardadoCreado = false;
                                 generarReclamosGuardados();
 
                             }
@@ -136,15 +135,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void generarReclamosGuardados(){
         //Recupero todos los clubes y los cargo en un arrayList
-        ReclamosLocalHelper helper = new ReclamosLocalHelper(this);
+        ReclamosLocalHelper helper = new ReclamosLocalHelper(MainActivity.this);
         List<Reclamos> reclamos = helper.getReclamos();
 
         for (Reclamos r: reclamos
              ) {
             new RegistrarReclamoTask().execute(r);
         }
-        if(reclamoGuardadoCreado)
-            helper.deleteAllReclamos();
     }
     private void probarCall() {
         Retrofit retrofit = RetrofitClient.getClient();
@@ -290,7 +287,8 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 Toast.makeText(MainActivity.this, "Reclamo registrado correctamente", Toast.LENGTH_SHORT).show();
-                                reclamoGuardadoCreado = true;
+                                ReclamosLocalHelper helper = new ReclamosLocalHelper(MainActivity.this);
+                                helper.deleteAllReclamos();
                             }
                         });
                     } else {

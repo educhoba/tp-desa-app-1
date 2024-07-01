@@ -49,11 +49,11 @@ public class ReclamosService implements IService<Reclamos, Reclamos> {
             throw new ReclamoException("Error al registrar.");
         //si entro a registrar nunca deberia tener id
         reclamos.setIdReclamo(null);
-        if(reclamos.getLegajo() == 0)
+        if(reclamos.getLegajo() != null && reclamos.getLegajo() == 0)
             reclamos.setLegajo(null);
-        if(reclamos.getIdReclamoUnificado() == 0)
+        if(reclamos.getIdReclamoUnificado() != null && reclamos.getIdReclamoUnificado() == 0)
             reclamos.setIdReclamoUnificado(null);
-        if(reclamos.getIdDesperfecto() == 0)
+        if(reclamos.getIdDesperfecto() != null && reclamos.getIdDesperfecto() == 0)
             reclamos.setIdDesperfecto(null);
 
         guardar(reclamos);

@@ -70,9 +70,11 @@ public class ReclamosController {
                 img.setIdReclamo(id);
                 imagenesService.guardarImagen(img);
             }
-            for (SitiosManuales sm : reclamos.getSitiosManuales()) {
-                sm.setIdReclamo(id);
-                smService.registrarSitio(sm);
+            if(reclamos.getSitiosManuales() != null){
+                for (SitiosManuales sm : reclamos.getSitiosManuales()) {
+                    sm.setIdReclamo(id);
+                    smService.registrarSitio(sm);
+                }
             }
         }
         catch (ReclamoException | ImagenException| SitioManualException ex){
