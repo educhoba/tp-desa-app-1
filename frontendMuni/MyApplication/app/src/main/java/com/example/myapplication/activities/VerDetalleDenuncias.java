@@ -77,15 +77,23 @@ public class VerDetalleDenuncias extends AppCompatActivity {
         @Override
         protected void onPostExecute(Denuncias denuncia) {
             if (denuncia != null) {
+                if (dni.equals(denuncia.getDocumento())){
+                    textViewId.setText("Nro de denuncia: " + denuncia.getIdDenuncias());
+                    textViewSitio.setText("Sitio: " + denuncia.getIdSitio());
+                    textViewDescripcion.setText("Descripción: " + denuncia.getDescripcion());
+                    textViewEstado.setText("Estado: " + denuncia.getEstado());
+                    ImagePagerAdapter adapter = new ImagePagerAdapter(denuncia.getImagenes());
+                    viewPager.setAdapter(adapter);
+                    tabLayout.setupWithViewPager(viewPager, true);
+                } else {
+                    textViewId.setText("Nro de denuncia: " + denuncia.getIdDenuncias());
+                    textViewSitio.setText("Sitio: " + denuncia.getIdSitio());
+                    textViewDescripcion.setText("Descripción: " + denuncia.getDescripcion());
+                    ImagePagerAdapter adapter = new ImagePagerAdapter(denuncia.getImagenes());
+                    viewPager.setAdapter(adapter);
+                    tabLayout.setupWithViewPager(viewPager, true);
+                }
 
-
-
-                textViewId.setText("ID: " + denuncia.getIdDenuncias());
-                textViewSitio.setText("Sitio: " + denuncia.getIdSitio());
-                textViewDescripcion.setText("Descripción: " + denuncia.getDescripcion());
-                ImagePagerAdapter adapter = new ImagePagerAdapter(denuncia.getImagenes());
-                viewPager.setAdapter(adapter);
-                tabLayout.setupWithViewPager(viewPager, true);
             } else {
                 Toast.makeText(VerDetalleDenuncias.this, "Error al obtener detalles del reclamo", Toast.LENGTH_SHORT).show();
             }
