@@ -2,6 +2,7 @@
 package application.controllers;
 
 import application.models.Desperfectos;
+import application.models.Sitios;
 import application.services.DesperfectosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,5 +25,9 @@ public class DesperfectosController {
         return ResponseEntity.ok(service.listar());
     }
 
+    @GetMapping("/{idDesperfecto}")
+    public ResponseEntity<Desperfectos> getSitio(@PathVariable Integer idDesperfecto) {
+        return ResponseEntity.ok(service.buscarPorId(idDesperfecto));
+    }
 }
 

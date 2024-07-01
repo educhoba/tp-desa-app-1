@@ -6,6 +6,7 @@ import application.services.SitiosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +24,10 @@ public class SitiosController {
     @GetMapping
     public ResponseEntity<List<Sitios>> listar() {
         return ResponseEntity.ok(service.listar());
+    }
+    @GetMapping("/{idSitio}")
+    public ResponseEntity<Sitios> getSitio(@PathVariable Integer idSitio) {
+        return ResponseEntity.ok(service.buscarPorId(idSitio));
     }
 
 }

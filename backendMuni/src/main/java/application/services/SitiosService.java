@@ -1,5 +1,6 @@
 package application.services;
 
+import application.models.Reclamos;
 import application.models.Sitios;
 import application.repositories.ISitiosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -36,7 +38,8 @@ public class SitiosService implements IService<Sitios, Sitios> {
 
     @Override
     public Sitios buscarPorId(Integer id) {
-        return null;
+        Optional<Sitios> ret = iRepository.findByIdSitio(id);
+        return ret.orElse(null);
     }
 
 }
