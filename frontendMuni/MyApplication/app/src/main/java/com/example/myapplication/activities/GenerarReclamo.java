@@ -33,9 +33,11 @@ import com.example.myapplication.RetrofitClient;
 import com.example.myapplication.data.ReclamosLocalHelper;
 import com.example.myapplication.models.Desperfectos;
 import com.example.myapplication.models.Imagenes;
+import com.example.myapplication.models.Inspector;
 import com.example.myapplication.models.Reclamos;
 import com.example.myapplication.models.Sitios;
 import com.example.myapplication.models.SitiosManuales;
+import com.example.myapplication.models.Usuarios;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -70,6 +72,10 @@ public class GenerarReclamo extends AppCompatActivity {
 
     private ConnectivityManager cm;
 
+    String cargo;
+    Usuarios usuario;
+    Inspector inspector;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +92,10 @@ public class GenerarReclamo extends AppCompatActivity {
         comentariosAuto = findViewById(R.id.comentariosAuto);
         //comentariosManual = findViewById(R.id.comentariosManual);
         sitioDireccionManual = findViewById(R.id.sitioDireccionManual);
+
+        cargo = getIntent().getStringExtra("cargo");
+
+
 
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -105,7 +115,7 @@ public class GenerarReclamo extends AppCompatActivity {
         generarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                generarReclamo();
+                generarReclamo(cargo);
             }
         });
         Button buttonImage = findViewById(R.id.buttonImage);
@@ -120,7 +130,7 @@ public class GenerarReclamo extends AppCompatActivity {
         new ObtenerDesperfectosUnicosTask().execute();
     }
 
-    private void generarReclamo() {
+    private void generarReclamo(String cargo) {
             // Obtener los datos del formulario según el modo seleccionado
             String modoCarga = obtenerModoCarga();
             Integer desperfectoId = -1;
@@ -128,9 +138,17 @@ public class GenerarReclamo extends AppCompatActivity {
             String sitioDireccion = "";
             String comentarios = "";
 
+
             // Crear objeto Reclamo
             Reclamos reclamo = new Reclamos();
-            reclamo.setDocumento("DNI28000046"); //TODO PONER EL DEL USUARIO
+            if (cargo.equals("Usuario")){
+                usuario =  (Usuarios) getIntent().getSerializableExtra("usuario");
+                reclamo.setDocumento(usuario.getDocumento());
+            }else{
+                inspector =  (Inspector) getIntent().getSerializableExtra("usuario");
+                reclamo.setLegajo(inspector.getLegajo());
+            }
+             //TODO PONER EL DEL USUARIO
             if (modoCarga.equals("opciones")) {
                 if(SitioSeleccionado < 1){
                     Toast.makeText(GenerarReclamo.this, "Seleccione un sitio.", Toast.LENGTH_SHORT).show();

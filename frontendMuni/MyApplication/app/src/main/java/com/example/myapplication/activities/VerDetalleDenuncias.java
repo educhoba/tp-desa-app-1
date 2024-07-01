@@ -33,9 +33,6 @@ public class VerDetalleDenuncias extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.verunadenuncia);
 
-
-
-
         textViewId = findViewById(R.id.textId);
         textViewSitio = findViewById(R.id.textSitio);
         textViewEstado = findViewById(R.id.textEstado);
